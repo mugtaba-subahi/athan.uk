@@ -13,7 +13,13 @@ export default defineNuxtConfig({
       { charset: "utf-8" },
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
       { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" },
+      { name: "theme-color", content: "#031b4b" },
+      { name: "description", content: "My Awesome App description" }
+    ],
+    link: [
+      { rel: "icon", href: "/favicon.ico" },
       { rel: "manifest", href: "/manifest.json" },
+      { rel: "mask-icon", sizes: "32x32", href: "/img/icons/icon-32x32.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" }
     ]
   },
@@ -41,13 +47,18 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
+        injectRegister: "auto",
         registerType: "autoUpdate",
+        workbox: {
+          globPatterns: ["**/*.{js,css,html,ico,png,svg}"]
+        },
         devOptions: {
           enabled: true
         },
         manifest: {
-          name: "Salah",
-          short_name: "Salah",
+          name: "AthanManifest1",
+          short_name: "AthanManifest2",
+          description: "My Awesome App descriptionxeee",
           theme_color: "#031b4b",
           background_color: "#311473",
           display: "fullscreen",
@@ -55,6 +66,16 @@ export default defineNuxtConfig({
           scope: "/",
           start_url: "/index.html",
           icons: [
+            {
+              src: "img/icons/pwa-192x192.png",
+              sizes: "192x192",
+              type: "image/png"
+            },
+            {
+              src: "img/icons/pwa-512x512.png",
+              sizes: "512x512",
+              type: "image/png"
+            },
             {
               src: "img/icons/icon-180x180.png",
               sizes: "180x180",
@@ -75,23 +96,4 @@ export default defineNuxtConfig({
       })
     ]
   }
-
-  // pwa: {
-  //   workbox: {
-  //     enabled: true
-  //   },
-  //   meta: {
-  //     title: "Salah1x-title",
-  //     author: "Salah1x-author",
-  //     mobileAppIOS: false,
-  //     appleStatusBarStyle: "black-translucent"
-  //   },
-
-  //   icon: {
-  //        fileName: 'app-icon.png',
-  //   },
-  //   icon: {
-  //     sizes: [64, 120, 144, 152, 192, 384, 512]
-  //   }
-  // },
 });
