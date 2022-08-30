@@ -15,6 +15,8 @@ import { useTimerStore } from "!stores/timer";
 import { PrayerController } from "!controllers/Prayer";
 import { TimerController } from "!controllers/Timer";
 
+//test
+
 const prayerStore = usePrayerStore();
 const timerStore = useTimerStore();
 const { finished } = storeToRefs(timerStore);
