@@ -44,8 +44,54 @@ export default defineNuxtConfig({
         registerType: "autoUpdate",
         devOptions: {
           enabled: true
+        },
+        manifest: {
+          name: "Salah",
+          short_name: "Salah",
+          theme_color: "#031b4b",
+          background_color: "#311473",
+          display: "fullscreen",
+          orientation: "portrait",
+          scope: "/",
+          start_url: "/index.html",
+          icons: [
+            {
+              src: "img/icons/icon-180x180.png",
+              sizes: "180x180",
+              type: "image/png"
+            },
+            {
+              src: "img/icons/icon-192x192.png",
+              sizes: "192x192",
+              type: "image/png"
+            },
+            {
+              src: "img/icons/icon-384x384.png",
+              sizes: "384x384",
+              type: "image/png"
+            }
+          ]
         }
       })
     ]
   }
+
+  // pwa: {
+  //   workbox: {
+  //     enabled: true
+  //   },
+  //   meta: {
+  //     title: "Salah1x-title",
+  //     author: "Salah1x-author",
+  //     mobileAppIOS: false,
+  //     appleStatusBarStyle: "black-translucent"
+  //   },
+
+  //   icon: {
+  //        fileName: 'app-icon.png',
+  //   },
+  //   icon: {
+  //     sizes: [64, 120, 144, 152, 192, 384, 512]
+  //   }
+  // },
 });
