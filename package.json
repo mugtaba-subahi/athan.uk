@@ -2,10 +2,12 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev",
-    "dev:clean": "rm .nuxt -r && nuxt dev",
-    "build": "nuxt build",
     "preview": "nuxt preview",
-    "build:preview": "nuxt build && nuxt preview"
+    "build": "nuxt build",
+    "build:preview": "nuxt build && nuxt preview",
+    "dev:clean": "yarn clean:nuxt && nuxt dev",
+    "clean:nuxt": "rm .nuxt .output -r || true",
+    "clean:all": "rm .nuxt .output node_modules yarn.lock -r"
   },
   "dependencies": {
     "@nuxtjs/robots": "^2.5.0",
@@ -17,6 +19,7 @@
     "tiny-timer": "^1.6.0"
   },
   "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/google-fonts": "^3.0.0-0",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/tailwindcss": "^5.3.2",
