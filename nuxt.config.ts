@@ -3,6 +3,8 @@ import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  components: true,
+
   meta: {
     title: "Athan",
     meta: [
@@ -13,8 +15,6 @@ export default defineNuxtConfig({
       { rel: "manifest", href: "/manifest.json" }
     ]
   },
-
-  components: true,
 
   alias: {
     "!api": resolve(__dirname, "./api"),
