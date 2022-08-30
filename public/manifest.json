@@ -1,6 +1,7 @@
 {
-  "name": "Salah1x",
-  "short_name": "Salah2x",
+  "name": "Athan",
+  "short_name": "Athan",
+  "description": "London prayer times",
   "theme_color": "#031b4b",
   "background_color": "#311473",
   "display": "fullscreen",
@@ -9,22 +10,22 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "img/icons/icon-180x180.png",
+      "src": "icons/icon-180x180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "img/icons/icon-192x192.png",
+      "src": "icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "img/icons/icon-384x384.png",
+      "src": "icons/icon-384x384.png",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "img/icons/icon-512x512.png",
+      "src": "icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

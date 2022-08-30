@@ -17,7 +17,6 @@
     "convert-time": "^0.3.0",
     "dayjs": "^1.11.5",
     "pinia": "^2.0.20",
-    "register-service-worker": "^1.7.2",
     "tiny-timer": "^1.6.0"
   },
   "devDependencies": {
