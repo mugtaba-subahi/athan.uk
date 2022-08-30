@@ -4,6 +4,7 @@
     "dev": "nuxt dev",
     "preview": "nuxt preview",
     "build": "nuxt build",
+    "generate": "nuxt generate",
     "build:preview": "nuxt build && nuxt preview",
     "dev:clean": "yarn clean:nuxt && nuxt dev",
     "clean:nuxt": "rm .nuxt .output -r || true",

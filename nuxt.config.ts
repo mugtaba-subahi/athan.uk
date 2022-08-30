@@ -3,7 +3,7 @@ import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: true,
+  ssr: false,
   components: true,
 
   meta: {
@@ -11,9 +11,9 @@ export default defineNuxtConfig({
     meta: [
       { charset: "utf-8" },
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
-      { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" },
-      { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" },
-      { rel: "manifest", href: "/manifest.json" }
+      { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" }
+      // { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" },
+      // { rel: "manifest", href: "/manifest.json" }
     ]
   },
 
@@ -33,7 +33,8 @@ export default defineNuxtConfig({
 
   pwa: {
     workbox: {
-      enabled: true
+      dev: true,
+      debug: true
     },
     meta: {
       title: "Salah1x-title",
