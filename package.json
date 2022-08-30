@@ -2,10 +2,12 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev",
-    "dev:clean": "rm .nuxt -r && nuxt dev",
-    "build": "nuxt build",
     "preview": "nuxt preview",
-    "build:preview": "nuxt build && nuxt preview"
+    "build": "nuxt build",
+    "build:preview": "nuxt build && nuxt preview",
+    "dev:clean": "yarn clean:nuxt && nuxt dev",
+    "clean:nuxt": "rm .nuxt .output -r || true",
+    "clean:all": "rm .nuxt .output node_modules yarn.lock -r"
   },
   "dependencies": {
     "@nuxtjs/robots": "^2.5.0",
