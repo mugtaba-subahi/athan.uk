@@ -3,7 +3,7 @@ import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   components: true,
 
   meta: {
@@ -53,6 +53,7 @@ export default defineNuxtConfig({
       splash_pages: null
     },
     icon: {
+      fileName: "icon.png",
       sizes: [64, 120, 144, 152, 192, 384, 512]
     }
   },
