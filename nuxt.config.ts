@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import { defineNuxtConfig } from "nuxt";
+import "./src/registerServiceWorker";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -29,35 +30,7 @@ export default defineNuxtConfig({
   },
 
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/robots"],
-  buildModules: ["nuxt-purgecss", "@nuxtjs/google-fonts", "@nuxtjs/pwa"],
-
-  pwa: {
-    workbox: {
-      dev: true,
-      debug: true
-    },
-    meta: {
-      title: "Salah1x-title",
-      author: "Salah1x-author",
-      mobileAppIOS: false,
-      appleStatusBarStyle: "black-translucent"
-    },
-    manifest: {
-      name: "Salah",
-      short_name: "Salah",
-      theme_color: "#031b4b",
-      background_color: "#311473",
-      display: "fullscreen",
-      orientation: "portrait",
-      Scope: "/",
-      start_url: "/index.html",
-      splash_pages: null
-    },
-    icon: {
-      fileName: "icon.png",
-      sizes: [64, 120, 144, 152, 192, 384, 512]
-    }
-  },
+  buildModules: ["nuxt-purgecss", "@nuxtjs/google-fonts"],
 
   googleFonts: {
     families: {
