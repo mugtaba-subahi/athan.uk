@@ -31,6 +31,9 @@ export default defineNuxtConfig({
   buildModules: ["nuxt-purgecss", "@nuxtjs/google-fonts", "@nuxtjs/pwa"],
 
   pwa: {
+    workbox: {
+      enabled: true
+    },
     meta: {
       title: "Salah1x-title",
       author: "Salah1x-author",
@@ -49,7 +52,7 @@ export default defineNuxtConfig({
       splash_pages: null
     },
     icon: {
-      sizes: [64, 120, 144, 152, 192, 384]
+      sizes: [64, 120, 144, 152, 192, 384, 512]
     }
   },
 

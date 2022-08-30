@@ -2,7 +2,9 @@
   <div>
     <Timer :nextPrayer="prayerStore.prayers[prayerStore.nextPrayerIndex] || null" :timeLeft="timerStore.nextPrayerTimeLeft" />
     <TheDate class="heading" v-once />
-    <Prayer v-for="(prayer, i) in prayerStore.prayers" :key="i" :prayer="prayer" />
+    <client-only>
+      <Prayer v-for="(prayer, i) in prayerStore.prayers" :key="i" :prayer="prayer" />
+    </client-only>
   </div>
 </template>
 
