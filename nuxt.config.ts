@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
-        mode: "development",
+        mode: "production",
         strategies: "generateSW"
       })
     ]
