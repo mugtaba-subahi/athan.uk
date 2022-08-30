@@ -7,8 +7,19 @@ export default defineNuxtConfig({
   ssr: true,
   components: true,
 
+  vite: {
+    plugins: [
+      VitePWA({
+        // injectRegister: "inline",
+        // mode: "development",
+        filename: "/sw.js"
+      })
+    ]
+  },
+
   meta: {
     title: "Athan",
+    htmlAttrs: [{ lang: "en" }],
     meta: [
       { charset: "utf-8" },
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
@@ -42,58 +53,5 @@ export default defineNuxtConfig({
     families: {
       Roboto: [400]
     }
-  },
-
-  vite: {
-    plugins: [
-      VitePWA({
-        injectRegister: "auto",
-        registerType: "autoUpdate",
-        workbox: {
-          globPatterns: ["**/*.{js,css,html,ico,png,svg}"]
-        },
-        devOptions: {
-          enabled: true
-        },
-        manifest: {
-          name: "AthanManifest1",
-          short_name: "AthanManifest2",
-          description: "My Awesome App descriptionxeee",
-          theme_color: "#031b4b",
-          background_color: "#311473",
-          display: "fullscreen",
-          orientation: "portrait",
-          scope: "/",
-          start_url: "/index.html",
-          icons: [
-            {
-              src: "img/icons/pwa-192x192.png",
-              sizes: "192x192",
-              type: "image/png"
-            },
-            {
-              src: "img/icons/pwa-512x512.png",
-              sizes: "512x512",
-              type: "image/png"
-            },
-            {
-              src: "img/icons/icon-180x180.png",
-              sizes: "180x180",
-              type: "image/png"
-            },
-            {
-              src: "img/icons/icon-192x192.png",
-              sizes: "192x192",
-              type: "image/png"
-            },
-            {
-              src: "img/icons/icon-384x384.png",
-              sizes: "384x384",
-              type: "image/png"
-            }
-          ]
-        }
-      })
-    ]
   }
 });
