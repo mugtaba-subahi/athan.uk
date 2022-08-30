@@ -17,7 +17,6 @@
     "convert-time": "^0.3.0",
     "dayjs": "^1.11.5",
     "pinia": "^2.0.20",
-    "register-service-worker": "^1.7.1",
     "tiny-timer": "^1.6.0"
   },
   "devDependencies": {
@@ -25,6 +24,7 @@
     "@nuxtjs/tailwindcss": "^5.3.2",
     "@vue/cli-plugin-pwa": "~4.5.9",
     "nuxt": "3.0.0-rc.8",
-    "nuxt-purgecss": "^1.0.0"
+    "nuxt-purgecss": "^1.0.0",
+    "vite-plugin-pwa": "^0.12.3"
   }
 }

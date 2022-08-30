@@ -1,10 +1,10 @@
 import { resolve } from "path";
 import { defineNuxtConfig } from "nuxt";
-import "./src/registerServiceWorker";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   components: true,
 
   meta: {
@@ -12,9 +12,9 @@ export default defineNuxtConfig({
     meta: [
       { charset: "utf-8" },
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
-      { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" }
-      // { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" },
-      // { rel: "manifest", href: "/manifest.json" }
+      { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" },
+      { rel: "manifest", href: "/manifest.json" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" }
     ]
   },
 
@@ -36,5 +36,16 @@ export default defineNuxtConfig({
     families: {
       Roboto: [400]
     }
+  },
+
+  vite: {
+    plugins: [
+      VitePWA({
+        registerType: "autoUpdate",
+        devOptions: {
+          enabled: true
+        }
+      })
+    ]
   }
 });
