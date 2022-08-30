@@ -41,7 +41,7 @@ export default defineNuxtConfig({
   },
 
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/robots"],
-  buildModules: ["nuxt-purgecss", "@nuxtjs/google-fonts"],
+  buildModules: ["nuxt-purgecss", "@nuxtjs/google-fonts", "@nuxtjs/web-vitals"],
 
   googleFonts: {
     families: {
