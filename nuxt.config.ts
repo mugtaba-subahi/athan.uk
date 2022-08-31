@@ -7,6 +7,20 @@ export default defineNuxtConfig({
   ssr: true,
   components: true,
 
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  buildModules: ["@nuxtjs/google-fonts"],
+
+  alias: {
+    "!api": resolve(__dirname, "./api"),
+    "!utils": resolve(__dirname, "./utils"),
+    "!config": resolve(__dirname, "./config"),
+    "!assets": resolve(__dirname, "./assets"),
+    "!stores": resolve(__dirname, "./stores"),
+    "!globals": resolve(__dirname, "./globals"),
+    "!components": resolve(__dirname, "./components"),
+    "!controllers": resolve(__dirname, "./controllers")
+  },
+
   vite: {
     plugins: [VitePWA()]
   },
@@ -29,20 +43,6 @@ export default defineNuxtConfig({
       { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" }
     ]
   },
-
-  alias: {
-    "!api": resolve(__dirname, "./api"),
-    "!utils": resolve(__dirname, "./utils"),
-    "!config": resolve(__dirname, "./config"),
-    "!assets": resolve(__dirname, "./assets"),
-    "!stores": resolve(__dirname, "./stores"),
-    "!globals": resolve(__dirname, "./globals"),
-    "!components": resolve(__dirname, "./components"),
-    "!controllers": resolve(__dirname, "./controllers")
-  },
-
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
-  buildModules: ["@nuxtjs/google-fonts"],
 
   googleFonts: {
     families: {
