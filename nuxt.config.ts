@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: true,
+  ssr: false,
   components: true,
 
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
@@ -22,20 +22,7 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [
-      VitePWA({
-        scope: ".",
-        strategies: "generateSW",
-        workbox: {
-          // Only precache these files - html should be excluded
-          globPatterns: ["**/*.{js,css}"],
-
-          // Don't fallback on document based (e.g. `/some-page`) requests
-          // Even though this says `null` by default, I had to set this specifically to `null` to make it work
-          navigateFallback: null
-        }
-      })
-    ]
+    plugins: [VitePWA()]
   },
 
   meta: {
