@@ -12,7 +12,7 @@ export default defineNuxtConfig({
       VitePWA({
         // mode: "development",
         // strategies: "generateSW",
-        filename: "/sw.js"
+        // filename: "/sw.js"
         // registerType: "prompt",
         // scope: "/"
       })
