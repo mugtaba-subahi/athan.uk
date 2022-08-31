@@ -13,8 +13,8 @@ export default defineNuxtConfig({
         // mode: "development",
         // strategies: "generateSW",
         // filename: "/sw.js"
-        // registerType: "prompt",
-        // scope: "/"
+        registerType: "prompt",
+        scope: "."
       })
     ]
   },
