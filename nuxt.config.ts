@@ -2,8 +2,6 @@ import { resolve } from "path";
 import { defineNuxtConfig } from "nuxt";
 import { VitePWA } from "vite-plugin-pwa";
 
-alert(window.onload);
-
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: true,
@@ -14,8 +12,9 @@ export default defineNuxtConfig({
   },
 
   meta: {
-    title: "Athan",
+    title: "Athanx",
     htmlAttrs: [{ lang: "en" }],
+    script: [{ src: "/sw.js" }],
     meta: [
       { charset: "utf-8" },
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
