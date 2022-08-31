@@ -6,7 +6,7 @@
   "background_color": "#311473",
   "display": "fullscreen",
   "orientation": "portrait",
-  "scope": ".",
+  "scope": "https://uat.athan.uk/",
   "start_url": "/",
   "icons": [
     {

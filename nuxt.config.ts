@@ -14,7 +14,7 @@ export default defineNuxtConfig({
         // strategies: "generateSW",
         // filename: "/sw.js"
         registerType: "prompt",
-        scope: "."
+        scope: "https://uat.athan.uk/"
       })
     ]
   },
