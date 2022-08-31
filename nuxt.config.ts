@@ -35,7 +35,6 @@ export default defineNuxtConfig({
   meta: {
     title: "Athan",
     htmlAttrs: [{ lang: "en" }],
-    // script: [{ src: "/sw.js" }],
     meta: [
       { charset: "utf-8" },
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
@@ -48,7 +47,8 @@ export default defineNuxtConfig({
       { rel: "manifest", href: "/manifest.json" },
       { rel: "mask-icon", sizes: "32x32", href: "/img/icons/icon-32x32.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" }
-    ]
+    ],
+    script: [{ src: "/sw.js" }]
   },
 
   googleFonts: {
