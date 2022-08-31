@@ -1,20 +1,14 @@
 import { resolve } from "path";
 import { defineNuxtConfig } from "nuxt";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  meta: {
-    title: "Athan",
-    meta: [
-      { charset: "utf-8" },
-      { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
-      { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" },
-      { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" },
-      { rel: "manifest", href: "/manifest.json" }
-    ]
-  },
-
+  ssr: true,
   components: true,
+
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  buildModules: ["@nuxtjs/google-fonts"],
 
   alias: {
     "!api": resolve(__dirname, "./api"),
@@ -27,35 +21,45 @@ export default defineNuxtConfig({
     "!controllers": resolve(__dirname, "./controllers")
   },
 
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/robots"],
-  buildModules: ["nuxt-purgecss", "@nuxtjs/google-fonts", "@nuxtjs/pwa", "@nuxtjs/dotenv"],
+  vite: {
+    plugins: [
+      VitePWA({
+        workbox: {
+          globPatterns: ["**/*.{js,css,html}"],
+          navigateFallback: null
+        }
+      })
+    ]
+  },
 
-  pwa: {
-    meta: {
-      title: "Salah1x-title",
-      author: "Salah1x-author",
-      mobileAppIOS: false,
-      appleStatusBarStyle: "black-translucent"
-    },
-    manifest: {
-      name: "Salah",
-      short_name: "Salah",
-      theme_color: "#031b4b",
-      background_color: "#311473",
-      display: "fullscreen",
-      orientation: "portrait",
-      Scope: "/",
-      start_url: "/index.html",
-      splash_pages: null
-    },
-    icon: {
-      sizes: [64, 120, 144, 152, 192, 384]
-    }
+  meta: {
+    title: "Athan",
+    htmlAttrs: [{ lang: "en" }],
+    meta: [
+      { charset: "utf-8" },
+      { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
+      { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" },
+      { name: "theme-color", content: "#031b4b" },
+      { name: "description", content: "My Awesome App description" }
+    ],
+    link: [
+      { rel: "icon", href: "/favicon.ico" },
+      { rel: "manifest", href: "/manifest.json" },
+      { rel: "mask-icon", sizes: "32x32", href: "/img/icons/icon-32x32.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" }
+    ]
   },
 
   googleFonts: {
     families: {
       Roboto: [400]
+    }
+  },
+
+  postcss: {
+    plugins: {
+      cssnano: true,
+      autoprefixer: true
     }
   }
 });

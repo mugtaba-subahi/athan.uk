@@ -1,5 +1,12 @@
 # Nuxt 3 Minimal Starter
 
+## TODO
+
+1. Prayer component sometimes stays blue instead of next Prayer
+2. Look into caching API request
+3. Is this really the correct way to run a PWA? `navigator.serviceWorker...` placed into App.vue
+4. Unhandled error if API call fails
+
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
 ## Setup
