@@ -5,6 +5,9 @@
     <client-only>
       <Prayer v-for="(prayer, i) in prayerStore.prayers" :key="i" :prayer="prayer" />
     </client-only>
+    <client-only>
+      <TheServiceWorker />
+    </client-only>
   </div>
 </template>
 
