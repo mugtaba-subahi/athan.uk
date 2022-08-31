@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: true,
+  ssr: false,
   components: true,
 
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
