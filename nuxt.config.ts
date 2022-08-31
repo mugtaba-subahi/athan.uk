@@ -8,15 +8,7 @@ export default defineNuxtConfig({
   components: true,
 
   vite: {
-    plugins: [
-      VitePWA({
-        // mode: "development",
-        // strategies: "generateSW",
-        // filename: "/sw.js"
-        registerType: "prompt",
-        scope: "https://uat.athan.uk/"
-      })
-    ]
+    plugins: [VitePWA()]
   },
 
   meta: {
