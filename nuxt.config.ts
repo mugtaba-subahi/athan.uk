@@ -4,11 +4,19 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   components: true,
 
   vite: {
-    plugins: [VitePWA()]
+    plugins: [
+      VitePWA({
+        // mode: "development",
+        // strategies: "generateSW",
+        // filename: "/sw.js"
+        registerType: "prompt",
+        scope: "https://uat.athan.uk/"
+      })
+    ]
   },
 
   meta: {
