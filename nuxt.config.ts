@@ -35,7 +35,7 @@ export default defineNuxtConfig({
   meta: {
     title: "Athan",
     htmlAttrs: [{ lang: "en" }],
-    script: [{ src: "/sw.js" }],
+    // script: [{ src: "/sw.js" }],
     meta: [
       { charset: "utf-8" },
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
