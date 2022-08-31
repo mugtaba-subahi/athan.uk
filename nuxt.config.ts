@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   components: true,
 
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
@@ -47,13 +47,19 @@ export default defineNuxtConfig({
       { rel: "manifest", href: "/manifest.json" },
       { rel: "mask-icon", sizes: "32x32", href: "/img/icons/icon-32x32.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/img/icons/icon-180x180.png" }
-    ],
-    script: [{ src: "/sw.js" }]
+    ]
   },
 
   googleFonts: {
     families: {
       Roboto: [400]
+    }
+  },
+
+  postcss: {
+    plugins: {
+      cssnano: true,
+      autoprefixer: true
     }
   }
 });

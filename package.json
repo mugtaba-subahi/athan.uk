@@ -23,5 +23,9 @@
     "@nuxtjs/tailwindcss": "^5.3.2",
     "nuxt": "3.0.0-rc.8",
     "vite-plugin-pwa": "^0.12.3"
+  },
+  "optionalDependencies": {
+    "iltorb": "~2.0.0",
+    "node-zopfli-es": "~1.0.3"
   }
 }
