@@ -22,11 +22,23 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [VitePWA()]
+    plugins: [
+      VitePWA({
+        strategies: "generateSW",
+        workbox: {
+          // Only precache these files - html should be excluded
+          globPatterns: ["**/*.{js,css}"],
+
+          // Don't fallback on document based (e.g. `/some-page`) requests
+          // Even though this says `null` by default, I had to set this specifically to `null` to make it work
+          navigateFallback: null
+        }
+      })
+    ]
   },
 
   meta: {
-    title: "Athanx",
+    title: "Athan",
     htmlAttrs: [{ lang: "en" }],
     script: [{ src: "/sw.js" }],
     meta: [
