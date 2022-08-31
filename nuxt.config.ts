@@ -24,6 +24,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
+        scope: ".",
         strategies: "generateSW",
         workbox: {
           // Only precache these files - html should be excluded
