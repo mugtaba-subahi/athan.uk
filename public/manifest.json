@@ -5,7 +5,7 @@
   "description": "London prayer times",
   "theme_color": "#031b4b",
   "background_color": "#311473",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
