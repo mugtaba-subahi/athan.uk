@@ -10,6 +10,7 @@
 3. Include navigation
 4. Update install prompt
 5. Add "new update" promt
+6. handle PWA icons and remove public/temp
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
