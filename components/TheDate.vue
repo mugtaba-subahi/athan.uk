@@ -2,7 +2,7 @@
   <section class="heading">
     <p class="heading--location">London, UK</p>
     <p class="heading--date">{{ date }}</p>
-    <img class="heading--img" src="../assets/mosque.svg" alt="Icon of a mosque" />
+    <img class="heading--mosque" src="../assets/mosque.svg" alt="Icon of a mosque" />
   </section>
 </template>
 
@@ -19,8 +19,8 @@ const date = new Date().toLocaleString("en-GB", {
 .heading {
   grid-template-columns: 1fr auto;
   grid-template-areas:
-    "location  img"
-    "date      img";
+    "location  mosque"
+    "date      mosque";
 
   @apply grid;
 
@@ -32,8 +32,8 @@ const date = new Date().toLocaleString("en-GB", {
     @apply text-lg leading-6;
   }
 
-  &--img {
-    grid-area: img;
+  &--mosque {
+    grid-area: mosque;
     filter: drop-shadow(0 2px 3px hsla(0, 91%, 45%, 0.22));
     @apply w-12 pointer-events-none;
   }
