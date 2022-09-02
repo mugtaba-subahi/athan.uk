@@ -1,13 +1,44 @@
-import { IGetPrayersApiResponse } from "!api";
+import * as Api from "!api";
 import { TimerController } from "!controllers/Timer";
 import { prayerNamesArabic, prayerNamesEnglish } from "!globals";
 import { IPrayerItem, IUsePrayerStoreState } from "!stores/prayers";
+import { getCache, setCache } from "!utils/cache";
 
 export class PrayerController {
   private store: IUsePrayerStoreState;
 
   constructor(store: IUsePrayerStoreState) {
     this.store = store;
+  }
+
+  public static async fetchPrayers() {
+    const cache = getCache("data");
+
+    if (!cache) {
+      // get prayers times and set new cache cache
+      const apiResult = await Api.get();
+      setCache("data", { updatedAt: new Date(), apiResult });
+
+      return apiResult;
+    }
+
+    // prepare date check
+    const today = new Date().getDate();
+    const updatedAt = new Date(cache.updatedAt).getDate();
+
+    if (today === updatedAt) {
+      console.log("compared dates", { updatedAt, today });
+      console.log("valid cache for today", { cache });
+      return cache.apiResult;
+    }
+
+    console.log("outdated cache", { cache });
+
+    // cache outdated. set new cache
+    const apiResult = await Api.get();
+    setCache("data", { updatedAt: new Date(), apiResult });
+
+    return apiResult;
   }
 
   public setNextPrayer = (): void => {
@@ -26,7 +57,7 @@ export class PrayerController {
     this.store.prayers[this.store.nextPrayerIndex].isNext = false;
   };
 
-  public setApiResult = (apiResult: IGetPrayersApiResponse): void => {
+  public setApiResult = (apiResult: Api.IGetPrayersApiResponse): void => {
     const prayers = prayerNamesEnglish.map((name, index): IPrayerItem => {
       const prayer = {
         index,
