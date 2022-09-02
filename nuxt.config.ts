@@ -40,12 +40,17 @@ export default defineNuxtConfig({
       { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
       { name: "viewport", content: "width=device-width,initial-scale=1.0,user-scalable=no" },
       { name: "theme-color", content: "#031b4b" },
-      { name: "description", content: "My Awesome App description" }
+      { name: "description", content: "London prayer times" },
+      { name: "msapplication-TileColor", content: "#603cba" },
+      { name: "msapplication-config", content: "/icons/browserconfig.xml" }
     ],
     link: [
-      { rel: "icon", href: "/favicon.ico" },
       { rel: "manifest", href: "/manifest.json" },
-      { rel: "apple-touch-icon", sizes: "192x192", href: "/img/icons/icon-192x192.png" }
+      { rel: "icon", sizes: "16x16", href: "/icons/favicon-16x16.png" },
+      { rel: "icon", sizes: "32x32", href: "/icons/favicon-32x32.png" },
+      { rel: "shortcut icon", href: "/icons/favicon.ico" },
+      { rel: "mask-icon", href: "/icons/safari-pinned-tab.svg", color: "#603cba" },
+      { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-192x192.png" }
     ]
   },
 
