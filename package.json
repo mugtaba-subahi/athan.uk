@@ -3,7 +3,7 @@
   "scripts": {
     "build": "nuxt build",
     "build:preview": "nuxt build && nuxt preview",
-    "clean:all": "rm .nuxt .output node_modules yarn.lock -r",
+    "clean:all": "rm .nuxt .output node_modules yarn.lock package-lock.json -r",
     "clean:nuxt": "rm .nuxt .output -r || true",
     "dev": "nuxt dev",
     "dev:clean": "yarn clean:nuxt && nuxt dev",

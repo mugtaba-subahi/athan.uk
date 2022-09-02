@@ -6,6 +6,9 @@
 2. Look into caching API request
 3. Is this really the correct way to run a PWA? `navigator.serviceWorker...` placed into App.vue
 4. Unhandled error if API call fails
+5. Include navigation
+6. Update install prompt
+7. Add "new update" promt
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 

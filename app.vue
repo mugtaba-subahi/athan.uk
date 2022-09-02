@@ -19,7 +19,7 @@ const prayerStore = usePrayerStore();
 const timerStore = useTimerStore();
 const { finished } = storeToRefs(timerStore);
 
-const apiResult = await Api.get();
+const apiResult = await PrayerController.fetchPrayers();
 
 // handle prayers on load
 const PrayerCon = new PrayerController(prayerStore);
