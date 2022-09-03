@@ -55,7 +55,7 @@ export default defineNuxtConfig({
       { rel: "apple-touch-icon", sizes: "152x152", href: "/icons/icon-mask-152x152.png" },
       { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-mask-192x192.png" }
     ],
-    script: [{ src: "/registerServiceWorker.js" }]
+    script: [{ src: "/registerSW.js" }]
   },
 
   googleFonts: {
