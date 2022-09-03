@@ -1,14 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "build:preview": "nuxt build && nuxt preview",
-    "clean:all": "rm .nuxt .output node_modules yarn.lock package-lock.json -r",
-    "clean:nuxt": "rm .nuxt .output -r || true",
     "dev": "nuxt dev",
-    "dev:clean": "yarn clean:nuxt && nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "build": "nuxt build",
+    "preview": "nuxt preview",
+    "clea:dev": "yarn clean:nuxt && nuxt dev",
+    "clean:preview": "yarn clean:nuxt && nuxt build && nuxt preview",
+    "clean:nuxt": "rm .nuxt .output -r || true",
+    "clean:all": "rm .nuxt .output node_modules yarn.lock package-lock.json -r"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.1",
