@@ -11,6 +11,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
 
+import * as ServiceWorker from "@/public/serviceWorker";
 import { usePrayerStore } from "!stores/prayers";
 import { useTimerStore } from "!stores/timer";
 import { PrayerController } from "!controllers/Prayer";
@@ -51,6 +52,8 @@ watch(finished, (isFinished) => {
 
   TimerCon.start(prayerStore.prayers, prayerStore.nextPrayerIndex);
 });
+
+onMounted(() => ServiceWorker.register());
 </script>
 
 <style lang="postcss">

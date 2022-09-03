@@ -26,7 +26,6 @@ export default defineNuxtConfig({
       VitePWA({
         workbox: {
           globPatterns: ["**/*.{js,css,html}"],
-          // globPatterns: ["*/*.*", "*.*"],
           navigateFallback: null
         }
       })
@@ -54,8 +53,7 @@ export default defineNuxtConfig({
       { rel: "apple-touch-icon", sizes: "120x120", href: "/icons/icon-mask-120x120.png" },
       { rel: "apple-touch-icon", sizes: "152x152", href: "/icons/icon-mask-152x152.png" },
       { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-mask-192x192.png" }
-    ],
-    script: [{ src: "/registerServiceWorker.js" }]
+    ]
   },
 
   googleFonts: {
