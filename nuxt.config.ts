@@ -9,12 +9,6 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@kevinmarrec/nuxt-pwa"],
   buildModules: ["@nuxtjs/google-fonts"],
 
-  pwa: {
-    icon: {
-      fileName: "icons/icon-144x144.png"
-    }
-  },
-
   alias: {
     "!api": resolve(__dirname, "./api"),
     "!utils": resolve(__dirname, "./utils"),
