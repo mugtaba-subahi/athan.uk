@@ -6,8 +6,8 @@ export default defineNuxtConfig({
   ssr: false,
   components: true,
 
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@kevinmarrec/nuxt-pwa"],
-  buildModules: ["@nuxtjs/google-fonts"],
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  buildModules: ["@nuxtjs/google-fonts", "@kevinmarrec/nuxt-pwa"],
 
   pwa: {
     workbox: {
