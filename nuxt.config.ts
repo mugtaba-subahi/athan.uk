@@ -12,9 +12,6 @@ export default defineNuxtConfig({
   pwa: {
     icon: {
       fileName: "icons/icon-144x144.png"
-    },
-    workbox: {
-      enabled: true
     }
   },
 
