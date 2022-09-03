@@ -10,81 +10,10 @@ export default defineNuxtConfig({
   buildModules: ["@nuxtjs/google-fonts"],
 
   pwa: {
-    meta: {
-      author: "Me"
-    },
-    manifest: {
-      name: "Nuxt.js PWAs are so easy",
-      short_name: "Nuxt.js PWA",
-      lang: "en"
+    workbox: {
+      enabled: true
     }
   },
-
-  // pwa: {
-  //   icon: false,
-  //   manifest: {
-  //     name: "Athan",
-  //     short_name: "Athan",
-  //     description: "London prayer times",
-  //     theme_color: "#031b4b",
-  //     background_color: "#311473",
-  //     display: "standalone",
-  //     // "orientation": "portrait",
-  //     // "scope": "/",
-  //     start_url: "/",
-  //     // "splash_pages": null,
-  //     icons: [
-  //       {
-  //         src: "icons/icon-72x72.png",
-  //         sizes: "72x72",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       },
-  //       {
-  //         src: "icons/icon-96x96.png",
-  //         sizes: "96x96",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       },
-  //       {
-  //         src: "icons/icon-128x128.png",
-  //         sizes: "128x128",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       },
-  //       {
-  //         src: "icons/icon-144x144.png",
-  //         sizes: "144x144",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       },
-  //       {
-  //         src: "icons/icon-152x152.png",
-  //         sizes: "152x152",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       },
-  //       {
-  //         src: "icons/icon-192x192.png",
-  //         sizes: "192x192",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       },
-  //       {
-  //         src: "icons/icon-284x284.png",
-  //         sizes: "284x284",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       },
-  //       {
-  //         src: "icons/icon-512x512.png",
-  //         sizes: "512x512",
-  //         type: "image/png",
-  //         purpose: "any"
-  //       }
-  //     ]
-  //   }
-  // },
 
   alias: {
     "!api": resolve(__dirname, "./api"),
