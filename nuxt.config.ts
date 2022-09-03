@@ -10,15 +10,15 @@ export default defineNuxtConfig({
   buildModules: ["@nuxtjs/google-fonts"],
 
   pwa: {
-  meta: {
-    author: 'Me',
+    meta: {
+      author: "Me"
+    },
+    manifest: {
+      name: "Nuxt.js PWAs are so easy",
+      short_name: "Nuxt.js PWA",
+      lang: "en"
+    }
   },
-  manifest: {
-    name: 'Nuxt.js PWAs are so easy',
-    short_name: 'Nuxt.js PWA',
-    lang: 'en',
-  },
-}
 
   // pwa: {
   //   icon: false,
