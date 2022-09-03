@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts" setup>
+// test 1
 import { storeToRefs } from "pinia";
 
 import * as ServiceWorker from "@/public/serviceWorker";
