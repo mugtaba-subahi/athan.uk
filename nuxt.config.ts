@@ -1,14 +1,19 @@
 import { resolve } from "path";
 import { defineNuxtConfig } from "nuxt";
-import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
   components: true,
 
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@kevinmarrec/nuxt-pwa"],
   buildModules: ["@nuxtjs/google-fonts"],
+
+  pwa: {
+    workbox: {
+      enabled: true
+    }
+  },
 
   alias: {
     "!api": resolve(__dirname, "./api"),
@@ -19,17 +24,6 @@ export default defineNuxtConfig({
     "!globals": resolve(__dirname, "./globals"),
     "!components": resolve(__dirname, "./components"),
     "!controllers": resolve(__dirname, "./controllers")
-  },
-
-  vite: {
-    plugins: [
-      VitePWA({
-        workbox: {
-          globPatterns: ["**/*.{js,css,html}"],
-          navigateFallback: null
-        }
-      })
-    ]
   },
 
   meta: {
