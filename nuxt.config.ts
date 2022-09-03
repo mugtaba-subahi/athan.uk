@@ -10,6 +10,9 @@ export default defineNuxtConfig({
   buildModules: ["@nuxtjs/google-fonts"],
 
   pwa: {
+    icon: {
+      fileName: "icons/icon-144x144.png"
+    },
     workbox: {
       enabled: true
     }
