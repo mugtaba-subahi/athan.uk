@@ -2,15 +2,16 @@
 
 ## TODO
 
-<!-- 1. Prayer component sometimes stays blue instead of next Prayer -->
-<!-- 2. Look into caching API request -->
-<!-- 3. Is this really the correct way to run a PWA? `navigator.serviceWorker...` placed into App.vue -->
-<!-- 4. Unhandled error if API call fails  -->
+<!-- - Prayer component sometimes stays blue instead of next Prayer -->
+<!-- - Look into caching API request -->
+<!-- - Is this really the correct way to run a PWA? `navigator.serviceWorker...` placed into App.vue -->
+<!-- - Unhandled error if API call fails  -->
+<!-- - Include navigation -->
+<!-- - handle PWA icons and remove public/temp -->
 
-3. Include navigation
-4. Update install prompt
-5. Add "new update" promt
-6. handle PWA icons and remove public/temp
+- Handle offline mode
+- Update install prompt
+- Add "new update" promt
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 

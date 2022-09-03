@@ -50,7 +50,9 @@ export default defineNuxtConfig({
       { rel: "icon", sizes: "32x32", href: "/icons/favicon-32x32.png" },
       { rel: "shortcut icon", href: "/icons/favicon.ico" },
       { rel: "mask-icon", href: "/icons/safari-pinned-tab.svg", color: "#603cba" },
-      { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-192x192.png" }
+      { rel: "apple-touch-icon", sizes: "120x120", href: "/icons/icon-mask-120x120.png" },
+      { rel: "apple-touch-icon", sizes: "152x152", href: "/icons/icon-mask-152x152.png" },
+      { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-mask-192x192.png" }
     ]
   },
 
