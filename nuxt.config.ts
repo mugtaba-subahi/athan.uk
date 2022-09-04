@@ -24,12 +24,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
-        mode: "development",
+        mode: "production",
         registerType: "autoUpdate",
         manifestFilename: "manifest.json",
         injectRegister: null,
         workbox: {
-          globPatterns: ["**/*.{mjs,js,css,html}"],
+          globPatterns: ["**/*.{js,css,html}"],
           // navigateFallback: null,
           disableDevLogs: false
         },
