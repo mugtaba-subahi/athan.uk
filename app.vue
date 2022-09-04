@@ -9,19 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-// feature 1
-// feature 2
-// test3/feature 3
-// test3/feature 3
-
-// COMMIT1-USER2
-// COMMIT2-USER2
-// user1-commit1
-// user2-commit2
-
-// uat-commit1
-// uat-commit2
-
 import { storeToRefs } from "pinia";
 
 import * as ServiceWorker from "@/public/serviceWorker";
