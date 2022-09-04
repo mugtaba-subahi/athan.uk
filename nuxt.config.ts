@@ -29,8 +29,8 @@ export default defineNuxtConfig({
         manifestFilename: "manifest.json",
         injectRegister: null,
         workbox: {
-          globPatterns: ["**/*.{js,css,html}"],
-          // navigateFallback: null,
+          globPatterns: ["**/*.{html,css}"],
+          navigateFallback: "index.html",
           disableDevLogs: false
         },
         includeAssets: ["fonts/*.woff2  ", "*.svg"],
