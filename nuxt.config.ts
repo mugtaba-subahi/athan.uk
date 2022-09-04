@@ -24,21 +24,11 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
-        mode: "production",
-        // srcDir: "public",
-        // outDir: "public",
-        // filename: "sw.js",
+        mode: "development",
         manifestFilename: "manifest.json",
-        // strategies: "generateSW",
-        // scope: "/",
         injectRegister: null,
-        // minify: true,
-        // useCredentials: false,
-        // base: "/",
-        // includeManifestIcons: true,
-        // disable: false,
         workbox: {
-          globPatterns: ["**/*.{js,css,html}"],
+          globPatterns: ["*.html"],
           navigateFallback: null,
           disableDevLogs: false
         },
