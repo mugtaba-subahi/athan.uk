@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     plugins: [
       VitePWA({
         workbox: {
-          globPatterns: ["**/*.*}"],
+          globPatterns: ["**/*.*"],
           navigateFallback: null,
           disableDevLogs: false
         }
