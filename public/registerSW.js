@@ -9,5 +9,5 @@ const failed = (err) => {
 if ("serviceWorker" in navigator) {
   setTimeout(() => {
     navigator.serviceWorker.register("/sw.js").then(success, failed);
-  }, 5000);
+  }, 2000);
 }

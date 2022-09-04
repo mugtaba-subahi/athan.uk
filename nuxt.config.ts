@@ -25,13 +25,15 @@ export default defineNuxtConfig({
     plugins: [
       VitePWA({
         mode: "development",
+        registerType: "autoUpdate",
         manifestFilename: "manifest.json",
         injectRegister: null,
         workbox: {
-          globPatterns: ["index", "*.html", "**/*.{mjs,js,css,html}"],
+          globPatterns: ["**/*.{mjs,js,css,html}"],
           // navigateFallback: null,
           disableDevLogs: false
         },
+        includeAssets: ["fonts/*.woff2  ", "*.svg"],
         devOptions: {
           enabled: true,
           webManifestUrl: "/manifest.json"
