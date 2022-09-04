@@ -24,29 +24,83 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
-        mode: "production",
-        srcDir: "public",
-        outDir: "dist",
-        filename: "sw.js",
-        manifestFilename: "manifest.json",
-        strategies: "generateSW",
-        scope: "/",
-        injectRegister: "script",
-        minify: true,
-        manifest: false,
-        useCredentials: false,
-        base: "/",
-        includeManifestIcons: true,
-        disable: false,
+        // mode: "development",
+        // srcDir: "public",
+        // outDir: "public",
+        // filename: "sw.js",
+        // manifestFilename: "manifest.json",
+        // strategies: "generateSW",
+        // scope: "/",
+        // injectRegister: "inline",
+        // minify: true,
+        // manifest: {
+        //   id: "/",
+        //   name: "Athan",
+        //   short_name: "Athan",
+        //   description: "London prayer times",
+        //   theme_color: "#031b4b",
+        //   background_color: "#311473",
+        //   display: "standalone",
+        //   orientation: "portrait",
+        //   scope: "/",
+        //   start_url: "/",
+        //   icons: [
+        //     {
+        //       src: "icons/icon-72x72.png",
+        //       sizes: "72x72",
+        //       type: "image/png"
+        //     },
+        //     {
+        //       src: "icons/icon-96x96.png",
+        //       sizes: "96x96",
+        //       type: "image/png"
+        //     },
+        //     {
+        //       src: "icons/icon-128x128.png",
+        //       sizes: "128x128",
+        //       type: "image/png"
+        //     },
+        //     {
+        //       src: "icons/icon-144x144.png",
+        //       sizes: "144x144",
+        //       type: "image/png"
+        //     },
+        //     {
+        //       src: "icons/icon-152x152.png",
+        //       sizes: "152x152",
+        //       type: "image/png"
+        //     },
+        //     {
+        //       src: "icons/icon-192x192.png",
+        //       sizes: "192x192",
+        //       type: "image/png"
+        //     },
+        //     {
+        //       src: "icons/icon-284x284.png",
+        //       sizes: "284x284",
+        //       type: "image/png"
+        //     },
+        //     {
+        //       src: "icons/icon-512x512.png",
+        //       sizes: "512x512",
+        //       type: "image/png"
+        //     }
+        //   ]
+        // },
+        // manifest: false,
+        // useCredentials: false,
+        // base: "/",
+        // includeManifestIcons: true,
+        // disable: false,
         workbox: {
           globPatterns: ["**/*.{js,css,html}"],
-          navigateFallback: null,
+          // navigateFallback: null,
           disableDevLogs: false
-        },
-        devOptions: {
-          enabled: true,
-          webManifestUrl: "/manifest.json"
         }
+        // devOptions: {
+        // enabled: true
+        // webManifestUrl: "/manifest.json"
+        // }
       })
     ]
   },
