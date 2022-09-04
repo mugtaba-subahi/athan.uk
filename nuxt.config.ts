@@ -24,10 +24,28 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
+        mode: "production",
+        srcDir: "public",
+        outDir: "dist",
+        filename: "sw.js",
+        manifestFilename: "manifest.json",
+        strategies: "generateSW",
+        scope: "/",
+        injectRegister: "script",
+        minify: true,
+        manifest: false,
+        useCredentials: false,
+        base: "/",
+        includeManifestIcons: true,
+        disable: false,
         workbox: {
-          globPatterns: ["**/*.*"],
+          globPatterns: ["**/*.{js,css,html}"],
           navigateFallback: null,
           disableDevLogs: false
+        },
+        devOptions: {
+          enabled: true,
+          webManifestUrl: "/manifest.json"
         }
       })
     ]
@@ -54,8 +72,8 @@ export default defineNuxtConfig({
       { rel: "apple-touch-icon", sizes: "120x120", href: "/icons/icon-mask-120x120.png" },
       { rel: "apple-touch-icon", sizes: "152x152", href: "/icons/icon-mask-152x152.png" },
       { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-mask-192x192.png" }
-    ],
-    script: [{ src: "/registerSW.js" }]
+    ]
+    // script: [{ src: "/registerSW.js" }]
   },
 
   googleFonts: {
