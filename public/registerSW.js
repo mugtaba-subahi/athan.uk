@@ -6,14 +6,8 @@ const failed = (err) => {
   console.log("SW registration failed: ", err);
 };
 
-console.log("11111111111");
-
-window.onload = (event) => {
-  console.log("22222222");
-
-  if ("serviceWorker" in navigator) {
-    console.log("3333333");
-
+if ("serviceWorker" in navigator) {
+  setTimeout(() => {
     navigator.serviceWorker.register("/sw.js").then(success, failed);
-  }
-};
+  }, 5000);
+}
