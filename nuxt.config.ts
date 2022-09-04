@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       VitePWA({
         mode: "production",
         srcDir: "public",
-        outDir: "dist",
+        outDir: "public",
         filename: "sw.js",
         manifestFilename: "manifest.json",
         strategies: "generateSW",
