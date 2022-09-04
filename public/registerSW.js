@@ -5,5 +5,6 @@ if ("serviceWorker" in navigator) {
 
   window.addEventListener("load", () => {
     console.log("3333333");
+    navigator.serviceWorker.register("/sw.js", { scope: "/" });
   });
 }

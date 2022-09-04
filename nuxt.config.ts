@@ -27,16 +27,16 @@ export default defineNuxtConfig({
         mode: "production",
         // srcDir: "public",
         // outDir: "public",
-        filename: "sw.js",
+        // filename: "sw.js",
         manifestFilename: "manifest.json",
-        strategies: "generateSW",
-        scope: "/",
-        injectRegister: "auto",
-        minify: true,
-        useCredentials: false,
-        base: "/",
-        includeManifestIcons: true,
-        disable: false,
+        // strategies: "generateSW",
+        // scope: "/",
+        injectRegister: false,
+        // minify: true,
+        // useCredentials: false,
+        // base: "/",
+        // includeManifestIcons: true,
+        // disable: false,
         workbox: {
           globPatterns: ["**/*.{js,css,html}"],
           navigateFallback: null,
@@ -72,7 +72,7 @@ export default defineNuxtConfig({
       { rel: "apple-touch-icon", sizes: "152x152", href: "/icons/icon-mask-152x152.png" },
       { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-mask-192x192.png" }
     ],
-    script: [{ src: "/registerSW.js" }, { src: "/test1.js" }]
+    script: [{ src: "/registerSW.js" }]
   },
 
   googleFonts: {
