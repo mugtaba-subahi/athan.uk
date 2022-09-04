@@ -1,6 +1,6 @@
 {
   "regions": ["lhr1"],
   "github": {
-    "enabled": false
+    "silent": true
   }
 }
