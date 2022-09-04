@@ -31,7 +31,7 @@ export default defineNuxtConfig({
         manifestFilename: "manifest.json",
         // strategies: "generateSW",
         // scope: "/",
-        injectRegister: false,
+        injectRegister: null,
         // minify: true,
         // useCredentials: false,
         // base: "/",
