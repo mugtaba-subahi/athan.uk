@@ -15,6 +15,7 @@
 // test3/feature 3
 
 // COMMIT1-USER2
+// COMMIT2-USER2
 
 import { storeToRefs } from "pinia";
 
