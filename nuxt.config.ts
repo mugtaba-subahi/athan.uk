@@ -29,7 +29,7 @@ export default defineNuxtConfig({
         injectRegister: null,
         workbox: {
           globPatterns: ["index", "*.html", "**/*.{mjs,js,css,html}"],
-          navigateFallback: null,
+          // navigateFallback: null,
           disableDevLogs: false
         },
         devOptions: {
