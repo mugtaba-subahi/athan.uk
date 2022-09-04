@@ -9,7 +9,8 @@
 </template>
 
 <script lang="ts" setup>
-// test 6
+// feature 1
+// feature 2
 import { storeToRefs } from "pinia";
 
 import * as ServiceWorker from "@/public/serviceWorker";
