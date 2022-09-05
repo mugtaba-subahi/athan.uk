@@ -23,20 +23,20 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
-        mode: "development",
-        registerType: "autoUpdate",
+        // mode: "development",
+        // registerType: "autoUpdate",
         manifestFilename: "manifest.json",
         injectRegister: null,
         scope: "/",
         workbox: {
-          mode: "development",
-          modifyURLPrefix: { "/dist/": "/" },
+          // mode: "development",
+          // modifyURLPrefix: { "/dist/": "/" },
           globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
-          navigateFallback: `/`,
+          // navigateFallback: `/`,
           disableDevLogs: false
         },
         devOptions: {
-          navigateFallback: `/`,
+          // navigateFallback: `/`,
           enabled: true,
           webManifestUrl: "/manifest.json"
         }
