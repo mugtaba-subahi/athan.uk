@@ -30,7 +30,8 @@ export default defineNuxtConfig({
         scope: "/",
         workbox: {
           mode: "development",
-          globPatterns: ["**/*.{html,js,mjs,css,svg,woff2}"],
+          modifyURLPrefix: { "/dist/": "/" },
+          globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
           navigateFallback: `/`,
           disableDevLogs: false
         },

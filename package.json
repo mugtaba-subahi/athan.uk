@@ -5,7 +5,7 @@
     "build": "nuxt build",
     "preview": "nuxt preview",
     "clean:dev": "(yarn clean:nuxt || true) && nuxt dev",
-    "clean:preview": "yarn clean:nuxt && nuxt generate && nuxt preview",
+    "clean:preview": "yarn clean:nuxt && nuxt build && nuxt preview",
     "clean:nuxt": "rm .nuxt .output -r || true",
     "clean:all": "rm .nuxt .output node_modules yarn.lock package-lock.json -r"
   },
