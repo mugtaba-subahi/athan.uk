@@ -7,5 +7,5 @@ const failed = (err) => {
 };
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").then(success, failed);
+  navigator.serviceWorker.register("/sw.js", { scope: "/" }).then(success, failed);
 }

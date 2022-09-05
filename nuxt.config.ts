@@ -24,16 +24,17 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
-        mode: "production",
+        mode: "development",
         registerType: "autoUpdate",
         manifestFilename: "manifest.json",
         injectRegister: null,
+        scope: "/",
         workbox: {
-          globPatterns: ["**/*.{html,js,css}"],
-          navigateFallback: null,
+          mode: "development",
+          globPatterns: ["**/*.{html,js,mjs,css,svg,woff2}"],
+          navigateFallback: `https://localhost:3000/index.html`,
           disableDevLogs: false
         },
-        includeAssets: ["fonts/*.woff2  ", "*.svg"],
         devOptions: {
           enabled: true,
           webManifestUrl: "/manifest.json"
