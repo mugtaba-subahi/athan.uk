@@ -5,10 +5,8 @@ import { VitePWA } from "vite-plugin-pwa";
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
-  components: true,
 
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
-  buildModules: ["@nuxtjs/google-fonts"],
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "floating-vue/nuxt"],
 
   alias: {
     "!api": resolve(__dirname, "./api"),
@@ -24,10 +22,22 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
+        // mode: "development",
+        // registerType: "autoUpdate",
+        manifestFilename: "manifest.json",
+        injectRegister: null,
+        scope: "/",
         workbox: {
-          globPatterns: ["**/*.{js,css,html}"],
-          navigateFallback: null,
+          // mode: "development",
+          // modifyURLPrefix: { "/dist/": "/" },
+          globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
+          // navigateFallback: `/`,
           disableDevLogs: false
+        },
+        devOptions: {
+          // navigateFallback: `/`,
+          enabled: true,
+          webManifestUrl: "/manifest.json"
         }
       })
     ]

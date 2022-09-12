@@ -1,16 +1,30 @@
 <template>
-  <div class="prayer" :class="{ passed: prayer.passed, isNext: prayer.isNext }">
-    <p class="prayer__item prayer__item--english">{{ prayer.english }}</p>
-    <p class="prayer__item prayer__item--time">{{ prayer.time }}</p>
-    <p class="prayer__item prayer__item--arabic">{{ prayer.arabic }}</p>
-  </div>
+  <VTooltip :triggers="['hover', 'touch']" :autoHide="true" :disabled="!isShowable">
+    <template #popper> in {{ timeLeft }} </template>
+    <div class="prayer" :class="{ passed: prayer.passed, isNext: prayer.isNext }">
+      <p class="prayer__item prayer__item--english">{{ prayer.english }}</p>
+      <p class="prayer__item prayer__item--time">{{ prayer.time }}</p>
+      <p class="prayer__item prayer__item--arabic">{{ prayer.arabic }}</p>
+    </div>
+  </VTooltip>
 </template>
 
 <script lang="ts" setup>
 import { PropType } from "vue";
-import { IPrayerItem } from "!stores/prayers";
+
+import { TimerController } from "!controllers/Timer";
+import { IPrayerItem, usePrayerStore } from "!stores/prayers";
 
 const { prayer } = defineProps({ prayer: Object as PropType<IPrayerItem> });
+
+const prayerStore = usePrayerStore();
+const isShowable = prayer.index > prayerStore.nextPrayerIndex;
+
+const timeLeft = computed(() => {
+  const prayerTimeMS = TimerController.convert24hrToMillisecond(prayer.time.replace(" ", ":"));
+  const remainder = prayerTimeMS - new Date().getTime();
+  return TimerController.timeLeft(remainder);
+});
 </script>
 
 <style lang="postcss" scoped>
