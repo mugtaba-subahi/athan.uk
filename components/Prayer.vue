@@ -1,5 +1,5 @@
 <template>
-  <VTooltip :triggers="['hover', 'touch']" :autoHide="true" :disabled="!isShowable">
+  <VTooltip :triggers="['hover', 'touch']" :disabled="!isShowable">
     <template #popper> in {{ timeLeft }} </template>
     <div class="prayer" :class="{ passed: prayer.passed, isNext: prayer.isNext }">
       <p class="prayer__item prayer__item--english">{{ prayer.english }}</p>
