@@ -27,7 +27,24 @@ export class TimerController {
   };
 
   private _onTick = (tick: number): void => {
-    const current = dayjs("2000-01-01 00:00:00").add(tick, "ms").format("HH mm ss");
+    this.store.nextPrayerTimeLeft = TimerController.timeLeft(tick);
+  };
+
+  private _onDone = (): void => {
+    this.store.finished = true;
+  };
+
+  private static validateTime = (time: string): boolean => {
+    const militaryTimeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+    if (typeof time !== "string") return false;
+    else if (!time.match(militaryTimeRegex)) return false;
+    else return true;
+  };
+
+  // Utils
+  public static timeLeft = (time: number) => {
+    const current = dayjs("2000-01-01 00:00:00").add(new Date().getTime(), "ms").format("HH mm ss");
     const [hour, minute] = current.split(" ");
 
     let format = [""];
@@ -35,21 +52,7 @@ export class TimerController {
     minute !== "00" && format.push("m[m]");
     format.push("s[s]");
 
-    const timeLeft = dayjs("2000-01-01 00:00:00").add(tick, "ms").format(format.join(" "));
-    this.store.nextPrayerTimeLeft = timeLeft;
-  };
-
-  private _onDone = (): void => {
-    this.store.finished = true;
-  };
-
-  // Utils
-  private static validateTime = (time: string): boolean => {
-    const militaryTimeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-
-    if (typeof time !== "string") return false;
-    else if (!time.match(militaryTimeRegex)) return false;
-    else return true;
+    return dayjs("2000-01-01 00:00:00").add(time, "ms").format(format.join(" "));
   };
 
   public static convert12To24hr = (name: string, time: string): string => {
