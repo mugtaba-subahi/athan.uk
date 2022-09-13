@@ -53,7 +53,7 @@ export class PrayerController {
         english: name,
         passed: false,
         time: apiResult[name.toLocaleLowerCase()],
-        timeLeft: null
+        timeLeft: "..."
       };
 
       const military = TimerController.convert12To24hr(prayer.english, prayer.time);

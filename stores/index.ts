@@ -6,7 +6,7 @@ export interface IPrayerItem {
   arabic: string;
   passed: boolean;
   index: number;
-  timeLeft: string | null;
+  timeLeft: string;
 }
 
 export interface IUseStoreState {
