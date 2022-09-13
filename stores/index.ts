@@ -5,17 +5,17 @@ export interface IPrayerItem {
   time: string;
   arabic: string;
   passed: boolean;
-  isNext: boolean;
   index: number;
+  timeLeft: string | null;
 }
 
-export interface IUsePrayerStoreState {
+export interface IUseStoreState {
   prayers: IPrayerItem[];
   nextPrayerIndex: number;
 }
 
-export const usePrayerStore = defineStore("prayers", {
-  state: (): IUsePrayerStoreState => ({
+export default defineStore("store", {
+  state: (): IUseStoreState => ({
     prayers: [],
     nextPrayerIndex: -1
   })

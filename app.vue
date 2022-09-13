@@ -2,55 +2,34 @@
   <TheSpinner v-if="isLoading" />
   <TheError v-else-if="hasError" />
   <div v-else>
-    <Timer :nextPrayer="prayerStore.prayers[prayerStore.nextPrayerIndex] || null" :timeLeft="timerStore.nextPrayerTimeLeft" />
+    <Timer />
     <TheDate class="heading" v-once />
-    <Prayer v-for="(prayer, i) in prayerStore.prayers" :key="i" :prayer="prayer" />
+    <Prayer v-for="prayer in Store.prayers" :prayer="prayer" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from "pinia";
-
-import { usePrayerStore } from "!stores/prayers";
-import { useTimerStore } from "!stores/timer";
+import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
-import { TimerController } from "!controllers/Timer";
 
-const prayerStore = usePrayerStore();
-const timerStore = useTimerStore();
-const { finished } = storeToRefs(timerStore);
+const Store = useStore();
 
 let isLoading = ref(true);
 let hasError = ref(false);
 
-const PrayerCon = new PrayerController(prayerStore);
-const TimerCon = new TimerController(timerStore);
+const PrayerCon = new PrayerController(Store);
 
 try {
   const apiResult = await PrayerController.fetchPrayers();
 
-  // handle prayers on load
   PrayerCon.setApiResult(apiResult);
-  PrayerCon.setNextPrayer();
-
-  // handle timer on load
-  TimerCon.start(prayerStore.prayers, prayerStore.nextPrayerIndex);
+  PrayerCon.setNextPrayerIndex();
 
   isLoading.value = false;
 } catch (error) {
   isLoading.value = false;
   hasError.value = true;
 }
-
-// handle timer on finish
-watch(finished, (isFinished) => {
-  if (!isFinished) return;
-
-  PrayerCon.setPreviousPrayer();
-  PrayerCon.setNextPrayer();
-
-  TimerCon.start(prayerStore.prayers, prayerStore.nextPrayerIndex);
-});
 </script>
 
 <style lang="postcss">

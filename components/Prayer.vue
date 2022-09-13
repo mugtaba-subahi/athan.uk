@@ -1,5 +1,5 @@
 <template>
-  <div class="prayer" :class="{ passed: prayer.passed, isNext: prayer.isNext, selected }" ref="prayerRef">
+  <div class="prayer" :class="{ passed: prayer.passed, isNext, selected }" ref="prayerRef">
     <p class="prayer__item prayer__item--english">{{ prayer.english }}</p>
     <p class="prayer__item prayer__item--time">{{ prayer.time }}</p>
     <p class="prayer__item prayer__item--arabic">{{ prayer.arabic }}</p>
@@ -7,35 +7,27 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue";
 import { useTippy } from "vue-tippy/composition";
 
 import { TimerController } from "!controllers/Timer";
-import { IPrayerItem, usePrayerStore } from "!stores/prayers";
+import useStore, { IPrayerItem } from "!stores";
 
-const { prayer } = defineProps({ prayer: Object as PropType<IPrayerItem> });
+const { prayer } = defineProps<{ prayer: IPrayerItem }>();
 
-const prayerStore = usePrayerStore();
-const isShowable = prayer.index > prayerStore.nextPrayerIndex;
+const Store = useStore();
 
+const isNext = computed(() => prayer.index === Store.nextPrayerIndex);
 const selected = ref(false);
-
-const timeLeft = computed(() => {
-  const prayerTimeMS = TimerController.convert24hrToMillisecond(prayer.time.replace(" ", ":"));
-  const remainder = prayerTimeMS - new Date().getTime();
-  return TimerController.timeLeft(remainder);
-});
-
 const prayerRef = ref(null);
-const tippyConfig = {
-  content: "Reactive options!",
+
+const options = {
+  content: computed(() => prayer.timeLeft),
   arrow: true,
   arrowType: "round",
   size: "large",
   trigger: "click",
   distance: 3,
   theme: "custom",
-  animateFill: true,
   onHide() {
     selected.value = false;
   },
@@ -44,7 +36,8 @@ const tippyConfig = {
   }
 };
 
-useTippy(prayerRef, tippyConfig);
+!prayer.passed && new TimerController(Store, prayer.index).start();
+!prayer.passed && prayer.index !== Store.nextPrayerIndex && useTippy(prayerRef, options);
 </script>
 
 <style lang="postcss" scoped>

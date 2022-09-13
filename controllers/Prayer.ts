@@ -1,14 +1,14 @@
 import * as Api from "!api";
 import { TimerController } from "!controllers/Timer";
 import { prayerNamesArabic, prayerNamesEnglish } from "!globals";
-import { IPrayerItem, IUsePrayerStoreState } from "!stores/prayers";
+import { IPrayerItem, IUseStoreState } from "!stores";
 import { getCache, setCache } from "!utils/cache";
 
 export class PrayerController {
-  private store: IUsePrayerStoreState;
+  private Store: IUseStoreState;
 
-  constructor(store: IUsePrayerStoreState) {
-    this.store = store;
+  constructor(Store: IUseStoreState) {
+    this.Store = Store;
   }
 
   public static async fetchPrayers() {
@@ -41,20 +41,8 @@ export class PrayerController {
     return apiResult;
   }
 
-  public setNextPrayer = (): void => {
-    const nextPrayerIndex = this.store.prayers.findIndex((prayer) => !prayer.passed);
-    this.store.nextPrayerIndex = nextPrayerIndex;
-
-    if (nextPrayerIndex === -1) return;
-    this.store.prayers[nextPrayerIndex].isNext = true;
-  };
-
-  public setPreviousPrayer = (): void => {
-    const nextPrayerIndex = this.store.prayers.findIndex((prayer) => !prayer.passed);
-    if (nextPrayerIndex === -1) return;
-
-    this.store.prayers[this.store.nextPrayerIndex].passed = true;
-    this.store.prayers[this.store.nextPrayerIndex].isNext = false;
+  public setNextPrayerIndex = (): void => {
+    this.Store.nextPrayerIndex = this.Store.prayers.findIndex((prayer) => !prayer.passed);
   };
 
   public setApiResult = (apiResult: Api.IGetPrayersApiResponse): void => {
@@ -63,9 +51,9 @@ export class PrayerController {
         index,
         arabic: prayerNamesArabic[index],
         english: name,
-        isNext: false,
         passed: false,
-        time: apiResult[name.toLocaleLowerCase()]
+        time: apiResult[name.toLocaleLowerCase()],
+        timeLeft: null
       };
 
       const military = TimerController.convert12To24hr(prayer.english, prayer.time);
@@ -78,6 +66,6 @@ export class PrayerController {
       return prayer;
     });
 
-    this.store.prayers = prayers;
+    this.Store.prayers = prayers;
   };
 }
