@@ -1,8 +1,8 @@
 <template>
   <div class="timer">
-    <template v-if="nextPrayer">
-      <p class="timer__item">{{ nextPrayer.english }} in</p>
-      <p class="timer__item timer--time">{{ timeLeft }}</p>
+    <template v-if="Store.nextPrayerIndex !== -1">
+      <p class="timer__item">{{ Store.prayers[Store.nextPrayerIndex].english }} in</p>
+      <p class="timer__item timer--time">{{ Store.prayers[Store.nextPrayerIndex].timeLeft }}</p>
     </template>
     <template v-else>
       <p class="timer__item">All prayers passed</p>
@@ -11,14 +11,9 @@
 </template>
 
 <script lang="ts" setup>
-import { IPrayerItem } from "!stores/prayers";
+import useStore from "!stores";
 
-export interface Timer {
-  nextPrayer: IPrayerItem | null;
-  timeLeft: string;
-}
-
-const { nextPrayer, timeLeft } = defineProps<Timer>();
+const Store = useStore();
 </script>
 
 <style lang="postcss" scoped>

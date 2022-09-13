@@ -2,24 +2,20 @@ import dayjs from "dayjs";
 import TinyTimer from "tiny-timer";
 import convertTime from "convert-time";
 
-import { IPrayerItem } from "!stores/prayers";
-import { IUseTimerStoreState } from "!stores/timer";
-
 export class TimerController {
   private _timer = new TinyTimer();
-  private store: IUseTimerStoreState;
+  private Store: any;
+  private prayerIndex: number;
 
-  constructor(store: IUseTimerStoreState) {
-    this.store = store;
+  constructor(Store: any, prayerIndex) {
+    this.Store = Store;
+    this.prayerIndex = prayerIndex;
   }
 
-  public start = (prayersList: IPrayerItem[], nextPrayerIndex: number): void => {
-    if (nextPrayerIndex === -1) return;
-
-    const nextPrayerTime = TimerController.convert24hrToMillisecond(prayersList[nextPrayerIndex].time);
+  public start = (): void => {
+    const prayer = this.Store.prayers[this.prayerIndex];
+    const nextPrayerTime = TimerController.convert24hrToMillisecond(prayer.time);
     const remainder = nextPrayerTime - new Date().getTime();
-
-    this.store.finished = false;
 
     this._timer.start(remainder);
     this._timer.on("tick", this._onTick);
@@ -27,11 +23,21 @@ export class TimerController {
   };
 
   private _onTick = (tick: number): void => {
-    this.store.nextPrayerTimeLeft = TimerController.timeLeft(tick);
+    const timeLeft = dayjs("2000-01-01 00:00:00").add(tick, "ms");
+
+    let format = [""];
+    timeLeft.hour() && format.push("H[h]");
+    timeLeft.minute() && format.push("m[m]");
+    format.push("s[s]");
+
+    this.Store.prayers[this.prayerIndex].timeLeft = timeLeft.format(format.join(" "));
   };
 
   private _onDone = (): void => {
-    this.store.finished = true;
+    this.Store.prayers[this.prayerIndex].passed = true;
+
+    const isLastPrayer = this.prayerIndex === this.Store.prayers.length - 1;
+    isLastPrayer ? (this.Store.nextPrayerIndex = -1) : this.Store.nextPrayerIndex++;
   };
 
   private static validateTime = (time: string): boolean => {
@@ -43,18 +49,6 @@ export class TimerController {
   };
 
   // Utils
-  public static timeLeft = (time: number) => {
-    const current = dayjs("2000-01-01 00:00:00").add(new Date().getTime(), "ms").format("HH mm ss");
-    const [hour, minute] = current.split(" ");
-
-    let format = [""];
-    hour !== "00" && format.push("H[h]");
-    minute !== "00" && format.push("m[m]");
-    format.push("s[s]");
-
-    return dayjs("2000-01-01 00:00:00").add(time, "ms").format(format.join(" "));
-  };
-
   public static convert12To24hr = (name: string, time: string): string => {
     const isValidTime: boolean = TimerController.validateTime(time);
     if (!isValidTime) throw { error: true, message: "Invalid time" };
