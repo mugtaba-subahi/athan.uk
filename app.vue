@@ -66,6 +66,16 @@ body {
   background: linear-gradient(#031b4b, #660ca1);
   @apply text-white select-none p-4;
 }
+
+.tippy-tooltip.custom-theme {
+  background-color: black;
+  color: white;
+  padding: 15px 20px;
+}
+
+.tippy-roundarrow {
+  fill: black;
+}
 </style>
 
 <style lang="postcss" scoped>

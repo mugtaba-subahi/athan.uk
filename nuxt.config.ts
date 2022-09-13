@@ -6,7 +6,7 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineNuxtConfig({
   ssr: false,
 
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "floating-vue/nuxt"],
+  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
 
   alias: {
     "!api": resolve(__dirname, "./api"),
