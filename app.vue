@@ -47,13 +47,11 @@ body {
 }
 
 .tippy-tooltip.custom-theme {
-  background-color: black;
-  color: white;
-  padding: 15px 20px;
+  @apply text-white bg-black py-4 px-6;
 }
 
 .tippy-roundarrow {
-  fill: black;
+  @apply fill-black;
 }
 </style>
 

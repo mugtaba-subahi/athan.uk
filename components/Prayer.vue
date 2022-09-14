@@ -8,7 +8,6 @@
 
 <script lang="ts" setup>
 import { useTippy } from "vue-tippy/composition";
-
 import { TimerController } from "!controllers/Timer";
 import useStore, { IPrayerItem } from "!stores";
 
@@ -16,17 +15,22 @@ const { prayer } = defineProps<{ prayer: IPrayerItem }>();
 
 const Store = useStore();
 
+// cannot be ref otherwise wont be re-evaluated. only once on load
 const isNext = computed(() => prayer.index === Store.nextPrayerIndex);
+const timeLeft = computed(() => prayer.timeLeft);
+
 const selected = ref(false);
 const prayerRef = ref(null);
 
 const options = {
-  content: computed(() => prayer.timeLeft),
+  content: timeLeft,
   arrow: true,
   arrowType: "round",
   size: "large",
   trigger: "click",
-  distance: 3,
+  distance: 7,
+  duration: [500, 500],
+  inertia: true,
   theme: "custom",
   onHide() {
     selected.value = false;
@@ -67,8 +71,6 @@ const options = {
 }
 
 .selected {
-  background-color: rgba(0, 0, 0, 0.381);
-  opacity: 1;
-  color: white;
+  @apply bg-black/40 opacity-100 text-white;
 }
 </style>
