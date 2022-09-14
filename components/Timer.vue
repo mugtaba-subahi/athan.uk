@@ -1,8 +1,8 @@
 <template>
   <div class="timer">
-    <template v-if="Store.nextPrayerIndex !== -1">
-      <p class="timer__item">{{ Store.prayers[Store.nextPrayerIndex].english }} in</p>
-      <p class="timer__item timer--time">{{ Store.prayers[Store.nextPrayerIndex].timeLeft }}</p>
+    <template v-if="nextPrayerIndex !== -1">
+      <p class="timer__item">{{ prayers[nextPrayerIndex].english }} in</p>
+      <p class="timer__item timer--time">{{ prayers[nextPrayerIndex].timeLeft }}</p>
     </template>
     <template v-else>
       <p class="timer__item">All prayers passed</p>
@@ -11,9 +11,11 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
 import useStore from "!stores";
 
 const Store = useStore();
+const { prayers, nextPrayerIndex } = storeToRefs(Store);
 </script>
 
 <style lang="postcss" scoped>

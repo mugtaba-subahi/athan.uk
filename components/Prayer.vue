@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
 import { useTippy } from "vue-tippy/composition";
 import { TimerController } from "!controllers/Timer";
 import useStore, { IPrayerItem } from "!stores";
@@ -14,14 +15,16 @@ import useStore, { IPrayerItem } from "!stores";
 const { prayer } = defineProps<{ prayer: IPrayerItem }>();
 
 const Store = useStore();
+const { nextPrayerIndex } = storeToRefs(Store);
 
 // cannot be ref otherwise wont be re-evaluated. only once on load
-const isNext = computed(() => prayer.index === Store.nextPrayerIndex);
+const isNext = computed(() => prayer.index === nextPrayerIndex.value);
 const timeLeft = computed(() => prayer.timeLeft);
 
 const selected = ref(false);
 const prayerRef = ref(null);
 
+const tippyTransitionMS = 500;
 const options = {
   content: timeLeft,
   arrow: true,
@@ -29,7 +32,7 @@ const options = {
   size: "large",
   trigger: "click",
   distance: 7,
-  duration: [500, 500],
+  duration: [tippyTransitionMS, tippyTransitionMS],
   inertia: true,
   theme: "custom",
   onHide() {
@@ -40,8 +43,16 @@ const options = {
   }
 };
 
+let tippyInstance = null;
+
 !prayer.passed && new TimerController(Store, prayer.index).start();
-!prayer.passed && prayer.index !== Store.nextPrayerIndex && useTippy(prayerRef, options);
+!prayer.passed && prayer.index !== nextPrayerIndex.value && (tippyInstance = useTippy(prayerRef, options));
+
+watch(nextPrayerIndex, (newIndex) => {
+  if (newIndex !== prayer.index) return;
+  tippyInstance.tippy.value.hide();
+  setTimeout(() => tippyInstance.tippy.value.destroy(), tippyTransitionMS);
+});
 </script>
 
 <style lang="postcss" scoped>

@@ -4,15 +4,17 @@
   <div v-else>
     <Timer />
     <TheDate class="heading" v-once />
-    <Prayer v-for="prayer in Store.prayers" :prayer="prayer" />
+    <Prayer v-for="prayer in prayers" :prayer="prayer" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
 import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
 
 const Store = useStore();
+const { prayers } = storeToRefs(Store);
 
 let isLoading = ref(true);
 let hasError = ref(false);
