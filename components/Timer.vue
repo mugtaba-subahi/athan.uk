@@ -20,7 +20,7 @@ const { prayers, nextPrayerIndex } = storeToRefs(Store);
 
 <style lang="postcss" scoped>
 .timer {
-  @apply mb-8 grid justify-items-center h-14;
+  @apply mb-8 grid justify-items-center h-12;
 
   &__item {
     @apply opacity-50 text-sm;

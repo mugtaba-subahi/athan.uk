@@ -19,19 +19,24 @@ const { prayers } = storeToRefs(Store);
 let isLoading = ref(true);
 let hasError = ref(false);
 
-const PrayerCon = new PrayerController(Store);
+onMounted(async () => {
+  const PrayerCon = new PrayerController(Store);
+  const [apiResult, error] = await PrayerController.fetchPrayers()
+    .then((result) => [result, null])
+    .catch((error) => [null, error]);
 
-try {
-  const apiResult = await PrayerController.fetchPrayers();
+  if (error) {
+    console.log(error);
+    isLoading.value = false;
+    hasError.value = true;
+    return;
+  }
 
   PrayerCon.setApiResult(apiResult);
   PrayerCon.setNextPrayerIndex();
 
   isLoading.value = false;
-} catch (error) {
-  isLoading.value = false;
-  hasError.value = true;
-}
+});
 </script>
 
 <style lang="postcss">
