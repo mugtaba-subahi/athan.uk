@@ -5,7 +5,7 @@
       <p class="timer__item timer--time">{{ prayers[nextPrayerIndex].timeLeft }}</p>
     </template>
     <template v-else>
-      <p class="timer__item">All prayers passed</p>
+      <p class="timer__item timer--finished">All prayers passed</p>
     </template>
   </div>
 </template>
@@ -20,7 +20,7 @@ const { prayers, nextPrayerIndex } = storeToRefs(Store);
 
 <style lang="postcss" scoped>
 .timer {
-  @apply mb-8 grid justify-items-center;
+  @apply mb-8 grid justify-items-center h-14;
 
   &__item {
     @apply opacity-50 text-sm;
@@ -28,6 +28,10 @@ const { prayers, nextPrayerIndex } = storeToRefs(Store);
 
   &--time {
     @apply opacity-100 text-2xl;
+  }
+
+  &--finished {
+    @apply self-center;
   }
 }
 </style>
