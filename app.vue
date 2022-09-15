@@ -1,10 +1,12 @@
 <template>
-  <TheSpinner v-if="isLoading" />
-  <TheError v-else-if="hasError" />
-  <div v-else>
-    <Timer />
-    <TheDate class="heading" v-once />
-    <Prayer v-for="prayer in prayers" :prayer="prayer" />
+  <div class="container">
+    <TheSpinner v-if="isLoading" />
+    <TheError v-else-if="hasError" />
+    <div v-else>
+      <Timer />
+      <TheDate class="heading" v-once />
+      <Prayer v-for="prayer in prayers" :prayer="prayer" />
+    </div>
   </div>
 </template>
 
@@ -40,29 +42,31 @@ onMounted(async () => {
 </script>
 
 <style lang="postcss">
-@tailwind base;
-
 html,
 body {
   @apply h-full;
 }
 
 body {
-  font-family: "Roboto";
-  background: linear-gradient(#031b4b, #660ca1);
-  @apply text-white select-none p-4;
+  @apply font-['Roboto'] grid text-white select-none p-4 bg-gradient-to-b from-midnight to-aurora;
+  @apply sm:justify-items-center;
 }
 
 .tippy-tooltip.custom-theme {
+  box-shadow: rgba(3, 27, 75, 0.5) 0px 2px 8px 0px;
   @apply text-white bg-black py-4 px-6;
 }
 
-.tippy-roundarrow {
+.tippy-tooltip.custom-theme > .tippy-roundarrow {
   @apply fill-black;
 }
 </style>
 
 <style lang="postcss" scoped>
+.container {
+  @apply sm:min-w-[630px];
+}
+
 .heading {
   @apply mb-8;
 }

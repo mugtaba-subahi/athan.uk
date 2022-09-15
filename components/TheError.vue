@@ -17,7 +17,7 @@
   @apply grid grid-flow-row justify-items-center;
 
   &--mosque {
-    filter: drop-shadow(0 2px 3px hsla(0, 91%, 45%, 0.22));
+    filter: drop-shadow(0 2px 3px hsla(263, 99%, 65%, 0.5));
     @apply w-16 mr-4 pointer-events-none;
   }
 

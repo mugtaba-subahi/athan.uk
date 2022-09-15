@@ -34,7 +34,7 @@ const date = new Date().toLocaleString("en-GB", {
 
   &--mosque {
     grid-area: mosque;
-    filter: drop-shadow(0 2px 3px hsla(0, 91%, 45%, 0.22));
+    filter: drop-shadow(0 2px 3px hsla(263, 99%, 65%, 0.3));
     @apply w-12 pointer-events-none;
   }
 }
