@@ -4,7 +4,7 @@
     <TheError v-else-if="hasError" />
     <div v-else>
       <Timer />
-      <TheDate class="heading" v-once />
+      <TheDate class="date" v-once />
       <Prayer v-for="prayer in prayers" :prayer="prayer" />
     </div>
   </div>
@@ -67,7 +67,7 @@ body {
   @apply sm:min-w-[630px];
 }
 
-.heading {
+.date {
   @apply mb-8;
 }
 </style>
