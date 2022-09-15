@@ -79,5 +79,20 @@ export default defineNuxtConfig({
       cssnano: true,
       autoprefixer: true
     }
+  },
+
+  tailwindcss: {
+    config: {
+      content: ["~/components/*.vue"],
+      theme: {
+        extend: {
+          colors: {
+            midnight: "#031b4b",
+            aurora: "#660ca1",
+            ocean: "#0d6cda"
+          }
+        }
+      }
+    }
   }
 });

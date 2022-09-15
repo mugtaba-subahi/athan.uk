@@ -78,7 +78,7 @@ watch(nextPrayerIndex, (newIndex) => {
 }
 
 .isNext {
-  background-color: #0d6cda;
+  @apply drop-shadow-xl bg-ocean;
 }
 
 .selected {
