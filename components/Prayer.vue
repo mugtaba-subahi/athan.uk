@@ -72,6 +72,10 @@ watch(nextPrayerIndex, (newIndex) => {
   }
 }
 
+.prayer:not(.passed) + :not(:first-child):hover {
+  cursor: pointer;
+}
+
 .isNext,
 .passed {
   @apply opacity-100;
