@@ -42,6 +42,10 @@ onMounted(async () => {
 </script>
 
 <style lang="postcss">
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 html,
 body {
   @apply h-full;
