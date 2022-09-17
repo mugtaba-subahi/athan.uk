@@ -57,7 +57,7 @@ watch(nextPrayerIndex, (newIndex) => {
 
 <style lang="postcss" scoped>
 .prayer {
-  @apply grid grid-cols-3 justify-items-center text-lg rounded px-5 opacity-50 mb-1 transition-[background] duration-500;
+  @apply grid grid-cols-3 justify-items-center text-lg rounded px-5 opacity-50 mb-1 transition-[background] duration-500 outline-none;
 
   &__item {
     @apply py-3 justify-items-center;
@@ -73,12 +73,7 @@ watch(nextPrayerIndex, (newIndex) => {
 }
 
 .prayer:not(.passed) + :not(:first-child):hover {
-  cursor: pointer;
-}
-
-.isNext,
-.passed {
-  @apply opacity-100;
+  @apply cursor-pointer;
 }
 
 .isNext {
@@ -86,6 +81,12 @@ watch(nextPrayerIndex, (newIndex) => {
 }
 
 .selected {
-  @apply bg-black/40 opacity-100 text-white;
+  @apply bg-black/40 text-white;
+}
+
+.isNext,
+.passed,
+.selected {
+  @apply opacity-100;
 }
 </style>
