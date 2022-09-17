@@ -24,7 +24,7 @@ const timeLeft = computed(() => prayer.timeLeft);
 const selected = ref(false);
 const prayerRef = ref(null);
 
-const tippyTransitionMS = 500;
+const tippyTransitionMS = 400;
 const options = {
   content: timeLeft,
   arrow: true,
@@ -32,7 +32,7 @@ const options = {
   size: "large",
   trigger: "click",
   distance: 7,
-  duration: [tippyTransitionMS, tippyTransitionMS],
+  duration: tippyTransitionMS,
   inertia: true,
   theme: "custom",
   onHide() {
