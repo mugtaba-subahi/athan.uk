@@ -57,7 +57,7 @@ watch(nextPrayerIndex, (newIndex) => {
 
 <style lang="postcss" scoped>
 .prayer {
-  @apply grid grid-cols-3 justify-items-center text-lg rounded px-5 opacity-50 mb-1 transition-[background] duration-400 outline-none;
+  @apply grid grid-cols-3 justify-items-center text-lg rounded px-5 opacity-50 mb-1 transition-[background] duration-[400ms] outline-none;
 
   &__item {
     @apply py-3 justify-items-center;
