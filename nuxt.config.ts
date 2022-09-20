@@ -23,23 +23,18 @@ export default defineNuxtConfig({
     plugins: [
       VitePWA({
         base: "/",
-        // mode: "development",
+        mode: "development",
         // registerType: "autoUpdate",
         manifestFilename: "manifest.json",
         injectRegister: null,
         scope: "/",
         workbox: {
-          // mode: "development",
-          // modifyURLPrefix: { "/dist/": "/" },
           globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
-          // navigateFallback: `/`,
           disableDevLogs: false
         },
         devOptions: {
           enabled: true,
-          /* when using generateSW the PWA plugin will switch to classic */
-          type: "module",
-          navigateFallback: "index.html"
+          navigateFallback: null
         }
       })
     ]
