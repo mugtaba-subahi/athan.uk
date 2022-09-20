@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
+        base: "/",
         // mode: "development",
         // registerType: "autoUpdate",
         manifestFilename: "manifest.json",
@@ -35,9 +36,10 @@ export default defineNuxtConfig({
           disableDevLogs: false
         },
         devOptions: {
-          // navigateFallback: `/`,
           enabled: true,
-          webManifestUrl: "/manifest.json"
+          /* when using generateSW the PWA plugin will switch to classic */
+          type: "module",
+          navigateFallback: "index.html"
         }
       })
     ]
