@@ -12,7 +12,8 @@ export class PrayerController {
   }
 
   public static async fetchPrayers() {
-    const cache = getCache("data");
+    const disableCache = true;
+    const cache = disableCache ? null : getCache("data");
 
     if (!cache) {
       // get prayers times and set new cache cache
