@@ -22,22 +22,13 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       VitePWA({
-        // mode: "development",
-        // registerType: "autoUpdate",
+        base: "/",
         manifestFilename: "manifest.json",
         injectRegister: null,
         scope: "/",
         workbox: {
-          // mode: "development",
-          // modifyURLPrefix: { "/dist/": "/" },
           globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
-          // navigateFallback: `/`,
-          disableDevLogs: false
-        },
-        devOptions: {
-          // navigateFallback: `/`,
-          enabled: true,
-          webManifestUrl: "/manifest.json"
+          disableDevLogs: true
         }
       })
     ]
