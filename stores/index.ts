@@ -12,11 +12,19 @@ export interface IPrayerItem {
 export interface IUseStoreState {
   prayers: IPrayerItem[];
   nextPrayerIndex: number;
+  allPrayersPassed: boolean;
+  dayOfMonth: number;
+  isLoading: boolean;
+  hasError: boolean;
 }
 
 export default defineStore("store", {
   state: (): IUseStoreState => ({
     prayers: [],
-    nextPrayerIndex: -1
+    nextPrayerIndex: -1,
+    allPrayersPassed: false,
+    dayOfMonth: new Date().getUTCDate(),
+    isLoading: true,
+    hasError: false
   })
 });

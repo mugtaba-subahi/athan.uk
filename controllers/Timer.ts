@@ -1,13 +1,15 @@
 import dayjs from "dayjs";
 import TinyTimer from "tiny-timer";
 import convertTime from "convert-time";
+import { IUseStoreState } from "!stores";
+import { PrayerController } from "!controllers/Prayer";
 
 export class TimerController {
   private _timer = new TinyTimer();
-  private Store: any;
+  private Store: IUseStoreState;
   private prayerIndex: number;
 
-  constructor(Store: any, prayerIndex) {
+  constructor(Store: IUseStoreState, prayerIndex) {
     this.Store = Store;
     this.prayerIndex = prayerIndex;
   }
@@ -37,7 +39,35 @@ export class TimerController {
     this.Store.prayers[this.prayerIndex].passed = true;
 
     const isLastPrayer = this.prayerIndex === this.Store.prayers.length - 1;
-    isLastPrayer ? (this.Store.nextPrayerIndex = -1) : this.Store.nextPrayerIndex++;
+
+    if (!isLastPrayer) {
+      this.Store.nextPrayerIndex++;
+      return;
+    }
+
+    this.Store.nextPrayerIndex = -1
+    this.Store.allPrayersPassed = true;
+  };
+
+  public loopUntilMidnight() {
+    console.log('Starting midnight loop...');
+
+    const checkNewDateEveryMs = 5_000; // every 5 mins
+
+    const loop = setInterval(async () => {
+      console.log('Checking if new day');
+
+      const isNewDay = this.Store.dayOfMonth !== new Date().getUTCDate();
+      if (!isNewDay) return;
+
+      this.Store.dayOfMonth = new Date().getUTCDate();
+      this.Store.allPrayersPassed = false;
+
+      await new PrayerController(this.Store).init();
+
+      console.log('New day. Stop midnight loop');
+      clearInterval(loop);
+    }, checkNewDateEveryMs);
   };
 
   private static validateTime = (time: string): boolean => {

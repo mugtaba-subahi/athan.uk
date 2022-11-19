@@ -11,7 +11,24 @@ export class PrayerController {
     this.Store = Store;
   }
 
+  public async init() {
+    const [apiResult, error] = await PrayerController.fetchPrayers()
+      .then((result) => [result, null])
+      .catch((error) => [null, error]);
+
+    if (error) {
+      console.log(error);
+      this.Store.isLoading = false;
+      this.Store.hasError = true;
+      return;
+    }
+
+    this.setApiResult(apiResult);
+    this.setNextPrayerIndex();
+  }
+
   public static async fetchPrayers() {
+    console.log('Cache is currently disabled until further PWA progress');
     const disableCache = true;
     const cache = disableCache ? null : getCache("data");
 
@@ -28,12 +45,12 @@ export class PrayerController {
     const updatedAt = new Date(cache.updatedAt).getDate();
 
     if (today === updatedAt) {
-      console.log("compared dates", { updatedAt, today });
-      console.log("valid cache for today", { cache });
+      console.log("Compared dates", { updatedAt, today });
+      console.log("Valid cache for today", { cache });
       return cache.apiResult;
     }
 
-    console.log("outdated cache", { cache });
+    console.log("Outdated cache", { cache });
 
     // cache outdated. set new cache
     const apiResult = await Api.get();

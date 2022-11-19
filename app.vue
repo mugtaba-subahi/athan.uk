@@ -14,30 +14,22 @@
 import { storeToRefs } from "pinia";
 import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
+import { TimerController } from "!controllers/Timer";
 
 const Store = useStore();
-const { prayers } = storeToRefs(Store);
+const { prayers, isLoading, hasError, nextPrayerIndex, allPrayersPassed } = storeToRefs(Store);
 
-let isLoading = ref(true);
-let hasError = ref(false);
+await new PrayerController(Store).init();
 
-onMounted(async () => {
-  const PrayerCon = new PrayerController(Store);
-  const [apiResult, error] = await PrayerController.fetchPrayers()
-    .then((result) => [result, null])
-    .catch((error) => [null, error]);
+isLoading.value = false;
 
-  if (error) {
-    console.log(error);
-    isLoading.value = false;
-    hasError.value = true;
-    return;
-  }
+// Loop logic onLoad
+allPrayersPassed.value = prayers.value[5].passed;
+allPrayersPassed.value && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
 
-  PrayerCon.setApiResult(apiResult);
-  PrayerCon.setNextPrayerIndex();
-
-  isLoading.value = false;
+// watch - for when application is left open (otherwise wont refresh at midnight)
+watch(allPrayersPassed, (shouldLoop) => {
+  shouldLoop && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
 });
 </script>
 
