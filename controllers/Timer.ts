@@ -52,7 +52,7 @@ export class TimerController {
   public loopUntilMidnight() {
     console.log('Starting midnight loop...');
 
-    const checkNewDateEveryMs = 5_000; // every 5 mins
+    const checkNewDateEveryMs = 300_000; // every 5 mins
 
     const loop = setInterval(async () => {
       console.log('Checking if new day');
