@@ -1,6 +1,6 @@
 import { deleteCache } from "!utils/cache";
 
-export const forceRefreshApplication = (): void => {
+export const forceApplicationRefresh = (): void => {
   deleteCache("data");
   location.reload();
 };

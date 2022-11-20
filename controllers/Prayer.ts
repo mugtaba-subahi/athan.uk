@@ -3,7 +3,7 @@ import { TimerController } from "!controllers/Timer";
 import { prayerNamesArabic, prayerNamesEnglish } from "!globals";
 import { IPrayerItem, IUseStoreState } from "!stores";
 import { getCache, setCache } from "!utils/cache";
-import { forceRefreshApplication } from "!utils/application";
+import { forceApplicationRefresh } from "!utils/application";
 
 export class PrayerController {
   private Store: IUseStoreState;
@@ -33,7 +33,7 @@ export class PrayerController {
       return cache.apiResult;
     }
 
-    forceRefreshApplication();
+    forceApplicationRefresh();
   }
 
   public setNextPrayerIndex = (): void => {

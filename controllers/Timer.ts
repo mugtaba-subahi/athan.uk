@@ -3,7 +3,7 @@ import TinyTimer from "tiny-timer";
 import convertTime from "convert-time";
 import { IUseStoreState } from "!stores";
 import { getCache } from "!utils/cache";
-import { forceRefreshApplication } from "!utils/application";
+import { forceApplicationRefresh } from "!utils/application";
 
 
 export class TimerController {
@@ -68,7 +68,7 @@ export class TimerController {
 
       if (!isNewDay) return console.log('Is not a new day');
 
-      forceRefreshApplication();
+      forceApplicationRefresh();
     }, checkNewDateEveryMs);
   };
 
