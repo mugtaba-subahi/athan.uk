@@ -11,22 +11,6 @@ export class PrayerController {
     this.Store = Store;
   }
 
-  public async init(): Promise<void> {
-    const [apiResult, error] = await PrayerController.fetchPrayers()
-      .then((result) => [result, null])
-      .catch((error) => [null, error]);
-
-    if (error) {
-      console.log(error);
-      this.Store.isLoading = false;
-      this.Store.hasError = true;
-      return;
-    }
-
-    this.setApiResult(apiResult);
-    this.setNextPrayerIndex();
-  }
-
   public static async fetchPrayers() {
     console.log('Cache is currently disabled until further PWA progress');
     const disableCache = true;

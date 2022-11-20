@@ -27,6 +27,6 @@ const urls = {
 };
 
 export const get = async (): Promise<IGetPrayersApiResponse> => {
-  const { data } = await useFetch<IGetPrayersApiResponse>(urls.getPrayersUrl);
+  const { data } = await useFetch<IGetPrayersApiResponse>(urls.getPrayersUrl, { cache: 'no-cache' });
   return data.value;
 };

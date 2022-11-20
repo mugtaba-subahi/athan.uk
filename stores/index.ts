@@ -14,8 +14,6 @@ export interface IUseStoreState {
   nextPrayerIndex: number;
   allPrayersPassed: boolean;
   dayOfMonth: number;
-  isLoading: boolean;
-  hasError: boolean;
 }
 
 export default defineStore("store", {
@@ -23,8 +21,6 @@ export default defineStore("store", {
     prayers: [],
     nextPrayerIndex: -1,
     allPrayersPassed: false,
-    dayOfMonth: new Date().getUTCDate(),
-    isLoading: true,
-    hasError: false
+    dayOfMonth: new Date().getUTCDate()
   })
 });
