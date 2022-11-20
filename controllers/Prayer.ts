@@ -11,7 +11,7 @@ export class PrayerController {
     this.Store = Store;
   }
 
-  public async init() {
+  public async init(): Promise<void> {
     const [apiResult, error] = await PrayerController.fetchPrayers()
       .then((result) => [result, null])
       .catch((error) => [null, error]);

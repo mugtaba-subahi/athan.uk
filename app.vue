@@ -23,7 +23,7 @@ await new PrayerController(Store).init();
 
 isLoading.value = false;
 
-// Loop logic onLoad
+// loop logic onLoad
 allPrayersPassed.value = prayers.value[5].passed;
 allPrayersPassed.value && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
 
