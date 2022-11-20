@@ -54,33 +54,9 @@ export class TimerController {
 
     const checkNewDateEveryMs = 300_000; // every 5 mins
 
-    const loop = setInterval(async () => {
+    setInterval(() => {
       const isNewDay = this.Store.dayOfMonth !== new Date().getUTCDate();
-
-      console.log('Checking if new day', {
-        storedDate: this.Store.dayOfMonth,
-        newDate: new Date().getUTCDate(),
-        isNewDay
-      });
-
-      if (!isNewDay) return console.log('Is NOT a new day');
-
-      console.log('Is a new day');
-
-      this.Store.dayOfMonth = new Date().getUTCDate();
-      this.Store.allPrayersPassed = false;
-
-      await new PrayerController(this.Store).init();
-
-      console.log('Stop midnight loop');
-
-      console.log({
-        storedDate: this.Store.dayOfMonth,
-        newDate: new Date().getUTCDate(),
-        isNewDay
-      });
-
-      clearInterval(loop);
+      isNewDay ? location.reload() : console.log('Is not a new day');
     }, checkNewDateEveryMs);
   };
 
