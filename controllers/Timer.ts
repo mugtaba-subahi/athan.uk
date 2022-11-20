@@ -2,7 +2,9 @@ import dayjs from "dayjs";
 import TinyTimer from "tiny-timer";
 import convertTime from "convert-time";
 import { IUseStoreState } from "!stores";
-import { PrayerController } from "!controllers/Prayer";
+import { getCache } from "!utils/cache";
+import { forceRefreshApplication } from "!utils/application";
+
 
 export class TimerController {
   private _timer = new TinyTimer();
@@ -49,14 +51,24 @@ export class TimerController {
     this.Store.allPrayersPassed = true;
   };
 
-  public loopUntilMidnight() {
+  public loopUntilMidnight(): void {
     console.log('Starting midnight loop...');
 
     const checkNewDateEveryMs = 300_000; // every 5 mins
 
-    setInterval(() => {
-      const isNewDay = this.Store.dayOfMonth !== new Date().getUTCDate();
-      isNewDay ? location.reload() : console.log('Is not a new day');
+    setInterval((): void => {
+      const cache = getCache("data");
+      const isNewDay = new Date(cache.updatedAt).getUTCDate() !== new Date().getUTCDate();
+
+      console.log('Checking if new day on loop', {
+        storedDay: new Date(cache.updatedAt).getUTCDate(),
+        newDay: new Date().getUTCDate(),
+        isNewDay
+      });
+
+      if (!isNewDay) return console.log('Is not a new day');
+
+      forceRefreshApplication();
     }, checkNewDateEveryMs);
   };
 

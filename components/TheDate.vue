@@ -7,24 +7,11 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from "pinia";
-import useStore from "!stores";
-
-const Store = useStore();
-const { dayOfMonth } = storeToRefs(Store);
-
-const dateConfig: Intl.DateTimeFormatOptions = {
+const date = new Date().toLocaleString("en-GB", {
   weekday: "short",
   year: "numeric",
   month: "short",
   day: "numeric"
-};
-
-let date = ref(new Date().toLocaleString("en-GB", dateConfig));
-
-// watch - for when application is left open (otherwise wont refresh at midnight)
-watch(dayOfMonth, () => {
-  date.value = new Date().toLocaleString("en-GB", dateConfig);
 });
 </script>
 

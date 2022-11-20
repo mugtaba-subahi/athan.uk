@@ -42,7 +42,7 @@ onMounted(async () => {
   isLoading.value = false;
 
   // loop logic onLoad
-  allPrayersPassed.value = prayers.value[5].passed;
+  allPrayersPassed.value = prayers.value[prayers.value.length - 1].passed;
   allPrayersPassed.value && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
 
   // watch - for when application is left open (otherwise wont refresh at midnight)

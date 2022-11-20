@@ -18,3 +18,8 @@ export const setCache = (name: string, data: ICacheData): void => {
   localStorage.setItem(name, JSON.stringify(data));
   console.log(`New cache set for ${name}`, { data });
 };
+
+export const deleteCache = (name: string): void => {
+  localStorage.removeItem(name);
+  console.log(`Deleted cache for ${name}`);
+};
