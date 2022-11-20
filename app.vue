@@ -17,7 +17,7 @@ import { PrayerController } from "!controllers/Prayer";
 import { TimerController } from "!controllers/Timer";
 
 const Store = useStore();
-const { prayers, nextPrayerIndex, allPrayersPassed } = storeToRefs(Store);
+const { prayers, nextPrayerIndex } = storeToRefs(Store);
 
 const isLoading = ref(true);
 const hasError = ref(false);
@@ -41,14 +41,9 @@ onMounted(async () => {
 
   isLoading.value = false;
 
-  // loop logic onLoad
-  allPrayersPassed.value = prayers.value[prayers.value.length - 1].passed;
-  allPrayersPassed.value && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
-
-  // watch - for when application is left open (otherwise wont refresh at midnight)
-  watch(allPrayersPassed, (shouldLoop) => {
-    shouldLoop && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
-  });
+  // loop onLoad
+  const allPrayersPassed = prayers.value[prayers.value.length - 1].passed;
+  allPrayersPassed && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
 });
 </script>
 

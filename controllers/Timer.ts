@@ -48,7 +48,7 @@ export class TimerController {
     }
 
     this.Store.nextPrayerIndex = -1
-    this.Store.allPrayersPassed = true;
+    this.loopUntilMidnight();
   };
 
   public loopUntilMidnight(): void {
