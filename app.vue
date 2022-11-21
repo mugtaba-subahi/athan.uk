@@ -14,15 +14,17 @@
 import { storeToRefs } from "pinia";
 import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
+import { TimerController } from "!controllers/Timer";
 
 const Store = useStore();
-const { prayers } = storeToRefs(Store);
+const { prayers, nextPrayerIndex } = storeToRefs(Store);
 
-let isLoading = ref(true);
-let hasError = ref(false);
+const isLoading = ref(true);
+const hasError = ref(false);
 
 onMounted(async () => {
   const PrayerCon = new PrayerController(Store);
+
   const [apiResult, error] = await PrayerController.fetchPrayers()
     .then((result) => [result, null])
     .catch((error) => [null, error]);
@@ -38,6 +40,10 @@ onMounted(async () => {
   PrayerCon.setNextPrayerIndex();
 
   isLoading.value = false;
+
+  // loop onLoad
+  const allPrayersPassed = prayers.value[prayers.value.length - 1].passed;
+  allPrayersPassed && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
 });
 </script>
 

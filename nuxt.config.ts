@@ -5,6 +5,7 @@ import { VitePWA } from "vite-plugin-pwa";
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
+  plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
 
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
 

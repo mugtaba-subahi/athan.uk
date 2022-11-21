@@ -3,6 +3,7 @@ import { TimerController } from "!controllers/Timer";
 import { prayerNamesArabic, prayerNamesEnglish } from "!globals";
 import { IPrayerItem, IUseStoreState } from "!stores";
 import { getCache, setCache } from "!utils/cache";
+import { forceApplicationRefresh } from "!utils/application";
 
 export class PrayerController {
   private Store: IUseStoreState;
@@ -11,9 +12,8 @@ export class PrayerController {
     this.Store = Store;
   }
 
-  public static async fetchPrayers() {
-    const disableCache = true;
-    const cache = disableCache ? null : getCache("data");
+  public static async fetchPrayers(): Promise<Api.IGetPrayersApiResponse> {
+    const cache = getCache("data");
 
     if (!cache) {
       // get prayers times and set new cache cache
@@ -28,18 +28,12 @@ export class PrayerController {
     const updatedAt = new Date(cache.updatedAt).getDate();
 
     if (today === updatedAt) {
-      console.log("compared dates", { updatedAt, today });
-      console.log("valid cache for today", { cache });
+      console.log("Compared dates on load", { updatedAt, today });
+      console.log("Valid cache for today", { cache });
       return cache.apiResult;
     }
 
-    console.log("outdated cache", { cache });
-
-    // cache outdated. set new cache
-    const apiResult = await Api.get();
-    setCache("data", { updatedAt: new Date(), apiResult });
-
-    return apiResult;
+    forceApplicationRefresh();
   }
 
   public setNextPrayerIndex = (): void => {

@@ -1,13 +1,17 @@
 import dayjs from "dayjs";
 import TinyTimer from "tiny-timer";
 import convertTime from "convert-time";
+import { IUseStoreState } from "!stores";
+import { getCache } from "!utils/cache";
+import { forceApplicationRefresh } from "!utils/application";
+
 
 export class TimerController {
   private _timer = new TinyTimer();
-  private Store: any;
+  private Store: IUseStoreState;
   private prayerIndex: number;
 
-  constructor(Store: any, prayerIndex) {
+  constructor(Store: IUseStoreState, prayerIndex) {
     this.Store = Store;
     this.prayerIndex = prayerIndex;
   }
@@ -37,7 +41,35 @@ export class TimerController {
     this.Store.prayers[this.prayerIndex].passed = true;
 
     const isLastPrayer = this.prayerIndex === this.Store.prayers.length - 1;
-    isLastPrayer ? (this.Store.nextPrayerIndex = -1) : this.Store.nextPrayerIndex++;
+
+    if (!isLastPrayer) {
+      this.Store.nextPrayerIndex++;
+      return;
+    }
+
+    this.Store.nextPrayerIndex = -1
+    this.loopUntilMidnight();
+  };
+
+  public loopUntilMidnight(): void {
+    console.log('Starting midnight loop...');
+
+    const checkNewDateEveryMs = 300_000; // every 5 mins
+
+    setInterval((): void => {
+      const cache = getCache("data");
+      const isNewDay = new Date(cache.updatedAt).getUTCDate() !== new Date().getUTCDate();
+
+      console.log('Checking if new day on loop', {
+        storedDay: new Date(cache.updatedAt).getUTCDate(),
+        newDay: new Date().getUTCDate(),
+        isNewDay
+      });
+
+      if (!isNewDay) return console.log('Is not a new day');
+
+      forceApplicationRefresh();
+    }, checkNewDateEveryMs);
   };
 
   private static validateTime = (time: string): boolean => {
