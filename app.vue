@@ -41,7 +41,7 @@ onMounted(async () => {
 
   isLoading.value = false;
 
-  // loop onLoad, start midnight timeout if all prayers finished
+  // start midnight timeout if all prayers finished
   const allPrayersPassed = prayers.value[prayers.value.length - 1].passed;
   allPrayersPassed && new TimerController(Store, nextPrayerIndex.value).startMidnightTimeout();
 });
