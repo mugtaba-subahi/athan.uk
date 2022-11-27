@@ -58,8 +58,9 @@ onMounted(async () => {
   let counter = 0;
   const wait = 60_000;
 
-  setInterval(async () => {
-    await Notification.requestPermission();
+  await Notification.requestPermission();
+  setInterval(() => {
+    console.log({ counter });
     new Notification(`Hi, How are you? ${counter}`, { tag: "athan" });
     counter++;
   }, 5000);
