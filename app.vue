@@ -43,7 +43,7 @@ onMounted(async () => {
 
   // loop onLoad
   const allPrayersPassed = prayers.value[prayers.value.length - 1].passed;
-  allPrayersPassed && new TimerController(Store, nextPrayerIndex.value).loopUntilMidnight();
+  allPrayersPassed && new TimerController(Store, nextPrayerIndex.value).startMidnightTimeout();
 });
 </script>
 

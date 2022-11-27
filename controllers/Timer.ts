@@ -48,29 +48,14 @@ export class TimerController {
     }
 
     this.Store.nextPrayerIndex = -1
-    this.loopUntilMidnight();
+    this.startMidnightTimeout();
   };
 
-  public loopUntilMidnight(): void {
-    console.log('Starting midnight loop...');
-
-    const checkNewDateEveryMs = 300_000; // every 5 mins
-
-    setInterval((): void => {
-      const cache = getCache("data");
-      const isNewDay = new Date(cache.updatedAt).getUTCDate() !== new Date().getUTCDate();
-
-      console.log('Checking if new day on loop', {
-        storedDay: new Date(cache.updatedAt).getUTCDate(),
-        newDay: new Date().getUTCDate(),
-        isNewDay
-      });
-
-      if (!isNewDay) return console.log('Is not a new day');
-
-      forceApplicationRefresh();
-    }, checkNewDateEveryMs);
-  };
+  public startMidnightTimeout(): void {
+    const timeLeftUntilMidnight = TimerController.timeLeftUntilMidnight();
+    setTimeout(() => forceApplicationRefresh(), timeLeftUntilMidnight)
+    console.log("Set timer for midnight refresh", { timeLeftUntilMidnight });
+  }
 
   private static validateTime = (time: string): boolean => {
     const militaryTimeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -111,4 +96,17 @@ export class TimerController {
 
     return now.getTime();
   };
+
+  public static timeLeftUntilMidnight(): number {
+    const now = new Date();
+
+    const midnight = new Date();
+    midnight.setDate(midnight.getDate() + 1);
+    midnight.setHours(0);
+    midnight.setMinutes(0);
+    midnight.setSeconds(1);
+    midnight.setMilliseconds(0);
+
+    return midnight.getTime() - now.getTime()
+  }
 }
