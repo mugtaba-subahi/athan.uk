@@ -60,13 +60,8 @@ onMounted(async () => {
 
   await Notification.requestPermission();
 
-  alert("first");
-
   new Notification(`Hi, How are you? ${counter}`, { tag: "athan" });
-
-  counter++;
-
-  alert("second");
+  alert("first");
 });
 </script>
 
