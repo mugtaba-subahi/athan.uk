@@ -62,6 +62,7 @@ onMounted(async () => {
   setInterval(() => {
     console.log({ counter });
     new Notification(`Hi, How are you? ${counter}`, { tag: "athan" });
+    alert({ counter });
     counter++;
   }, 5000);
 });
