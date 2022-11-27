@@ -1,9 +1,9 @@
 import * as Api from "!api";
-import { TimerController } from "!controllers/Timer";
 import { prayerNamesArabic, prayerNamesEnglish } from "!globals";
 import { IPrayerItem, IUseStoreState } from "!stores";
 import { getCache, setCache } from "!utils/cache";
 import { forceApplicationRefresh } from "!utils/application";
+import { convert12To24hr, convert24hrToMillisecond } from "!utils/time";
 
 export class PrayerController {
   private Store: IUseStoreState;
@@ -12,7 +12,14 @@ export class PrayerController {
     this.Store = Store;
   }
 
-  public static async fetchPrayers(): Promise<Api.IGetPrayersApiResponse> {
+  public async init(): Promise<void> {
+    const apiResult = await this._fetchPrayers();
+
+    this._setApiResult(apiResult);
+    this._setNextPrayerIndex();
+  }
+
+  private async _fetchPrayers(): Promise<Api.IGetPrayersApiResponse> {
     const cache = getCache("data");
 
     if (!cache) {
@@ -33,14 +40,11 @@ export class PrayerController {
       return cache.apiResult;
     }
 
+    // new date, old cache. clear cache and reload page
     forceApplicationRefresh();
   }
 
-  public setNextPrayerIndex = (): void => {
-    this.Store.nextPrayerIndex = this.Store.prayers.findIndex((prayer) => !prayer.passed);
-  };
-
-  public setApiResult = (apiResult: Api.IGetPrayersApiResponse): void => {
+  private _setApiResult = (apiResult: Api.IGetPrayersApiResponse): void => {
     const prayers = prayerNamesEnglish.map((name, index): IPrayerItem => {
       const prayer = {
         index,
@@ -51,8 +55,8 @@ export class PrayerController {
         timeLeft: "..."
       };
 
-      const military = TimerController.convert12To24hr(prayer.english, prayer.time);
-      const time = TimerController.convert24hrToMillisecond(military);
+      const military = convert12To24hr(prayer.english, prayer.time);
+      const time = convert24hrToMillisecond(military);
       const now = new Date().getTime();
 
       prayer.time = military;
@@ -62,5 +66,9 @@ export class PrayerController {
     });
 
     this.Store.prayers = prayers;
+  };
+
+  private _setNextPrayerIndex = (): void => {
+    this.Store.nextPrayerIndex = this.Store.prayers.findIndex((prayer) => !prayer.passed);
   };
 }
