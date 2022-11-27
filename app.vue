@@ -59,15 +59,14 @@ onMounted(async () => {
   const wait = 60_000;
 
   await Notification.requestPermission();
-  console.log({ counter });
 
-  alert({ counter });
+  alert("first");
 
   new Notification(`Hi, How are you? ${counter}`, { tag: "athan" });
 
   counter++;
 
-  alert({ counter });
+  alert("second");
 });
 </script>
 
