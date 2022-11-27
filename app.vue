@@ -44,6 +44,25 @@ onMounted(async () => {
   // loop onLoad
   const allPrayersPassed = prayers.value[prayers.value.length - 1].passed;
   allPrayersPassed && new TimerController(Store, nextPrayerIndex.value).startMidnightTimeout();
+
+  // TESTING BELOW
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+
+  let counter = 0;
+  const wait = 60_000;
+
+  setInterval(async () => {
+    await Notification.requestPermission();
+    new Notification(`Hi, How are you? ${counter}`, { tag: "athan" });
+    counter++;
+  }, 5000);
 });
 </script>
 

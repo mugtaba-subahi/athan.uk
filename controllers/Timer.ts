@@ -53,7 +53,9 @@ export class TimerController {
 
   public startMidnightTimeout(): void {
     const timeLeftUntilMidnight = TimerController.timeLeftUntilMidnight();
-    setTimeout(() => forceApplicationRefresh(), timeLeftUntilMidnight)
+
+    setTimeout(() => forceApplicationRefresh(), timeLeftUntilMidnight);
+
     console.log("Set timer for midnight refresh", { timeLeftUntilMidnight });
   }
 
