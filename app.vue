@@ -32,7 +32,7 @@ onMounted(async () => {
 
   isLoading.value = false;
 
-  // start midnight timeout if all prayers finished
+  // start midnight timeout if all prayers passed
   prayers.value[prayers.value.length - 1].passed && startMidnightTimeout();
 });
 </script>
