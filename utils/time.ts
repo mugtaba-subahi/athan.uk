@@ -1,5 +1,6 @@
 import convertTime from "convert-time";
 import { forceApplicationRefresh } from "!utils/application";
+import { getCache } from "!utils/cache";
 
 export const validateTime = (time: string): boolean => {
   const militaryTimeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
@@ -41,23 +42,24 @@ export const convert24hrToMillisecond = (time: string): number => {
   return now.getTime();
 };
 
-export const timeLeftUntilMidnight = (): number => {
-  const now = new Date();
+// must use interval. using settimeout until midnight will be throttled
+export const loopUntilMidnight = (): void => {
+  console.log('Starting midnight loop...');
 
-  const midnight = new Date();
-  midnight.setDate(midnight.getDate() + 1);
-  midnight.setHours(0);
-  midnight.setMinutes(0);
-  midnight.setSeconds(1);
-  midnight.setMilliseconds(0);
+  const checkNewDateEveryMs = 300_000; // every 5 mins
 
-  return midnight.getTime() - now.getTime()
-}
+  setInterval((): void => {
+    const cache = getCache("data");
+    const isNewDay = new Date(cache.updatedAt).getUTCDate() !== new Date().getUTCDate();
 
-export const startMidnightTimeout = (): void => {
-  const midnightRemainder = timeLeftUntilMidnight();
+    console.log('Checking if new day on loop', {
+      storedDay: new Date(cache.updatedAt).getUTCDate(),
+      newDay: new Date().getUTCDate(),
+      isNewDay
+    });
 
-  setTimeout(() => forceApplicationRefresh(), midnightRemainder);
+    if (!isNewDay) return console.log('Is not a new day');
 
-  console.log("Set timer for midnight refresh", { midnightRemainder });
-}
+    forceApplicationRefresh();
+  }, checkNewDateEveryMs);
+};

@@ -14,7 +14,7 @@
 import { storeToRefs } from "pinia";
 import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
-import { startMidnightTimeout } from "!utils/time";
+import { loopUntilMidnight } from "!utils/time";
 
 const Store = useStore();
 const { prayers } = storeToRefs(Store);
@@ -32,8 +32,8 @@ onMounted(async () => {
 
   isLoading.value = false;
 
-  // start midnight timeout if all prayers passed
-  prayers.value[prayers.value.length - 1].passed && startMidnightTimeout();
+  // start midnight loop if all prayers passed
+  prayers.value[prayers.value.length - 1].passed && loopUntilMidnight();
 });
 </script>
 

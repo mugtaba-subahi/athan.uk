@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import TinyTimer from "tiny-timer";
 import { IUseStoreState } from "!stores";
-import { convert24hrToMillisecond, startMidnightTimeout } from '!utils/time';
+import { convert24hrToMillisecond, loopUntilMidnight } from '!utils/time';
 
 export class TimerController {
   private _timer = new TinyTimer();
@@ -45,6 +45,6 @@ export class TimerController {
     }
 
     this.Store.nextPrayerIndex = -1
-    startMidnightTimeout();
+    loopUntilMidnight();
   };
 }
