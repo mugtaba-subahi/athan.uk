@@ -4,7 +4,7 @@
       <p class="error--heading">Oh no!</p>
       <p class="error--subheading">
         Something went wrong <br />
-        Please try refreshing the app
+        We are investigating!
       </p>
       <img class="error--mosque" src="../assets/mosque.svg" alt="Icon of a mosque" />
       <button class="close" @click="forceApplicationRefresh">
@@ -24,7 +24,8 @@
 <script setup>
 import { forceApplicationRefresh } from "!utils/application";
 
-setTimeout(() => forceApplicationRefresh(), 10_000); // Refresh in 10 seconds if user doesnt click refresh
+// Refresh in 10 seconds if user doesnt click refresh
+setTimeout(() => forceApplicationRefresh(), 10_000);
 </script>
 
 <style lang="postcss" scoped>
@@ -45,7 +46,7 @@ setTimeout(() => forceApplicationRefresh(), 10_000); // Refresh in 10 seconds if
   }
 
   &--subheading {
-    @apply text-xl mb-16 text-center;
+    @apply text-xl mb-16 text-center leading-8;
   }
 }
 
