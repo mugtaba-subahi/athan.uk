@@ -29,7 +29,7 @@ const urls = {
 export const get = async (): Promise<IGetPrayersApiResponse> => {
   const response = await useFetch<IGetPrayersApiResponse>(urls.getPrayersUrl, { cache: 'no-cache' });
 
-  if (response.data.value.fajr) return response.data.value
+  if (response.data?.value?.fajr) return response.data.value
 
   console.error('Error full:', response)
   console.error('Error partial:', response.data.value)
