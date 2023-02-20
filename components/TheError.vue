@@ -3,7 +3,7 @@
     <div class="error">
       <p class="error--heading">Oh no!</p>
       <p class="error--subheading">
-        Something went wrong. <br />
+        Something went wrong <br />
         We are investigating!
       </p>
       <img class="error--mosque" src="../assets/mosque.svg" alt="Icon of a mosque" />
