@@ -2,7 +2,10 @@
   <div class="component">
     <div class="error">
       <p class="error--heading">Oh no!</p>
-      <p class="error--subheading">Something went wrong</p>
+      <p class="error--subheading">
+        Something went wrong. <br />
+        We are investigating!
+      </p>
       <img class="error--mosque" src="../assets/mosque.svg" alt="Icon of a mosque" />
     </div>
   </div>
@@ -22,11 +25,11 @@
   }
 
   &--heading {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold mb-4;
   }
 
   &--subheading {
-    @apply text-xl mb-16;
+    @apply text-xl mb-16 text-center;
   }
 }
 </style>
