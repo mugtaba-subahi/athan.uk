@@ -3,13 +3,23 @@
     <div class="error">
       <p class="error--heading">Oh no!</p>
       <p class="error--subheading">
-        Something went wrong. <br />
-        We are investigating!
+        Something went wrong <br />
+        Please close and open the app
       </p>
+
       <img class="error--mosque" src="../assets/mosque.svg" alt="Icon of a mosque" />
+
+      <button @click="bob">close</button>
     </div>
   </div>
 </template>
+
+<script setup>
+const bob = () => {
+  console.log("eeee");
+  window.close();
+};
+</script>
 
 <style lang="postcss" scoped>
 .component {
