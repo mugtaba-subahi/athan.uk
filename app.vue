@@ -16,6 +16,9 @@ import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
 import { loopUntilMidnight } from "!utils/time";
 
+import { deleteCache } from "!utils/cache"; // TODO: REMOVE
+deleteCache("data"); // TODO: REMOVE
+
 const Store = useStore();
 const { prayers } = storeToRefs(Store);
 
