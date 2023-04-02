@@ -24,8 +24,8 @@
 <script setup>
 import { forceApplicationRefresh } from "!utils/application";
 
-// Refresh in 20 seconds if user doesnt click refresh
-setTimeout(() => forceApplicationRefresh(), 20_000);
+// Refresh in 10 seconds if user doesnt click refresh
+setTimeout(() => forceApplicationRefresh(), 10_000);
 </script>
 
 <style lang="postcss" scoped>
