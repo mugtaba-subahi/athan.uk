@@ -1,12 +1,13 @@
 <template>
   <div class="container">
-    <TheSpinner v-if="isLoading" />
-    <TheError v-else-if="hasError" />
+    <Spinner v-if="isLoading" />
+    <Error v-else-if="hasError" />
     <div v-else>
       <Timer />
-      <TheDate class="date" v-once />
-      <Prayer v-for="prayer in prayers" :prayer="prayer" />
+      <Date class="date" v-once />
+      <Prayer v-for="index in 6" :prayerIndex="index-1" />
     </div>
+    <Footer v-if="!isLoading" />
   </div>
 </template>
 
@@ -22,7 +23,7 @@ const { prayers } = storeToRefs(Store);
 const isLoading = ref(true);
 const hasError = ref(false);
 
-onMounted(async () => {
+const init = async () => {
   await new PrayerController(Store).init().catch((error) => {
     console.error(error);
     isLoading.value = false;
@@ -34,6 +35,10 @@ onMounted(async () => {
 
   // start midnight loop if all prayers passed
   prayers.value[prayers.value.length - 1].passed && loopUntilMidnight();
+}
+
+onMounted(async () => {
+  await init()
 });
 </script>
 
@@ -52,19 +57,21 @@ body {
   @apply sm:justify-items-center;
 }
 
-.tippy-tooltip.custom-theme {
+.tippy-box {
+  background-color: black;
   box-shadow: rgba(3, 27, 75, 0.5) 0px 2px 8px 0px;
-  @apply text-white bg-black py-4 px-6;
+  @apply text-white bg-black py-3 px-5 text-base;
 }
 
-.tippy-tooltip.custom-theme > .tippy-roundarrow {
-  @apply fill-black;
+.tippy-arrow {
+  background-color: black;
+  color: black;
 }
 </style>
 
 <style lang="postcss" scoped>
 .container {
-  @apply sm:min-w-[630px];
+  @apply sm:min-w-[630px] grid h-full;
 }
 
 .date {

@@ -1,8 +1,8 @@
-import { IGetPrayersApiResponse } from "!api";
+import { IGetPrayersApiResponse, ISinglePrayer } from "!api";
 
 interface ICacheData {
-  updatedAt: Date;
-  apiResult: IGetPrayersApiResponse;
+  result: IGetPrayersApiResponse;
+  updatedAt: number;
 }
 
 export const getCache = (name: string): ICacheData | null => {
@@ -22,4 +22,12 @@ export const setCache = (name: string, data: ICacheData): void => {
 export const deleteCache = (name: string): void => {
   localStorage.removeItem(name);
   console.log(`Deleted cache for ${name}`);
+};
+
+export const getPrayersByDateCache = (date: string): ISinglePrayer | null => {
+  const cache = getCache("data");
+
+  if (!cache) return null;
+
+  return cache.result.times[date] || null;
 };

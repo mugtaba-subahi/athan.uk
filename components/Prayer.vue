@@ -1,57 +1,60 @@
 <template>
-  <div class="prayer" :class="{ passed: prayer.passed, isNext, selected }" ref="prayerRef">
-    <p class="prayer__item prayer__item--english">{{ prayer.english }}</p>
-    <p class="prayer__item prayer__item--time">{{ prayer.time }}</p>
-    <p class="prayer__item prayer__item--arabic">{{ prayer.arabic }}</p>
+  <div class="prayer" :class="{ passed: prayers[prayerIndex].passed, isNext, selected }" ref="prayerRef">
+    <p class="prayer__item prayer__item--english">{{ prayers[prayerIndex].english }}</p>
+    <p class="prayer__item prayer__item--time">{{ prayers[prayerIndex].time }}</p>
+    <p class="prayer__item prayer__item--arabic">{{ prayers[prayerIndex].arabic }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { useTippy } from "vue-tippy/composition";
+import { useTippy, TippyOptions } from 'vue-tippy'
 import { TimerController } from "!controllers/Timer";
-import useStore, { IPrayerItem } from "!stores";
+import useStore from "!stores";
 
-const { prayer } = defineProps<{ prayer: IPrayerItem }>();
+import "tippy.js/dist/tippy.css";
+import 'tippy.js/animations/shift-away-subtle.css'
+
+const { prayerIndex } = defineProps<{ prayerIndex: number }>();
 
 const Store = useStore();
-const { nextPrayerIndex } = storeToRefs(Store);
+const { prayers, nextPrayerIndex, prayersDate } = storeToRefs(Store);
 
 // cannot be ref otherwise wont be re-evaluated. only once on load
-const isNext = computed(() => prayer.index === nextPrayerIndex.value);
-const timeLeft = computed(() => prayer.timeLeft);
+const isNext = computed(() => prayerIndex === nextPrayerIndex.value);
+const timeLeft = computed(() => prayers.value[prayerIndex].timeLeft);
 
 const selected = ref(false);
 const prayerRef = ref(null);
 
 const tippyTransitionMS = 400;
-const options = {
+const options: TippyOptions = {
   content: timeLeft,
   arrow: true,
-  arrowType: "round",
-  size: "large",
   trigger: "click",
-  distance: 7,
   duration: tippyTransitionMS,
   inertia: true,
-  theme: "custom",
-  onHide() {
-    selected.value = false;
-  },
-  onShow() {
-    selected.value = true;
-  }
+  animation: "shift-away-subtle",
+  onHide() { selected.value = false },
+  onShow() { selected.value = true }
 };
 
-let tippyInstance = null;
+let tippyInstance = useTippy(prayerRef, options);
 
-!prayer.passed && new TimerController(Store, prayer.index).start();
-!prayer.passed && prayer.index !== nextPrayerIndex.value && (tippyInstance = useTippy(prayerRef, options));
+if(!prayers.value[prayerIndex].passed) new TimerController(Store, prayerIndex).start();
 
-watch(nextPrayerIndex, (newIndex) => {
-  if (newIndex !== prayer.index) return;
-  tippyInstance.tippy.value.hide();
-  setTimeout(() => tippyInstance.tippy.value.destroy(), tippyTransitionMS);
+onMounted(() => {
+  tippyInstance.disable()
+  if(!prayers.value[prayerIndex].passed && prayerIndex > nextPrayerIndex.value) tippyInstance.enable();
+});
+
+onUpdated(() => {
+  if(prayers.value[prayerIndex].passed || prayerIndex == nextPrayerIndex.value) tippyInstance.disable();
+});
+
+watch(prayersDate, () => {
+  new TimerController(Store, prayerIndex).start();
+  if(!prayers.value[prayerIndex].passed && prayerIndex > nextPrayerIndex.value) tippyInstance.enable();
 });
 </script>
 

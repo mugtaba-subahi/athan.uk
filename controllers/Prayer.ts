@@ -1,9 +1,9 @@
 import * as Api from "!api";
 import { prayerNamesArabic, prayerNamesEnglish } from "!globals";
 import { IPrayerItem, IUseStoreState } from "!stores";
-import { getCache, setCache } from "!utils/cache";
+import { getCache, getPrayersByDateCache, setCache } from "!utils/cache";
 import { forceApplicationRefresh } from "!utils/application";
-import { convert12To24hr, convert24hrToMillisecond } from "!utils/time";
+import { convert24hrToMillisecond, getToday } from "!utils/time";
 
 export class PrayerController {
   private Store: IUseStoreState;
@@ -13,61 +13,76 @@ export class PrayerController {
   }
 
   public async init(): Promise<void> {
-    const apiResult = await this._fetchPrayers();
+    await this._fetchPrayers();
 
-    this._setApiResult(apiResult);
+    this._setPrayersForToday();
     this._setNextPrayerIndex();
   }
 
+  /**
+   * Fetches the prayer times from the API and returns them as a Promise.
+   * If there is a valid cache available, it returns the cached result.
+   * If the cache is outdated, it clears the cache and reloads the page.
+  */
   private async _fetchPrayers(): Promise<Api.IGetPrayersApiResponse> {
     const cache = getCache("data");
 
     if (!cache) {
       // get prayers times and set new cache cache
       const apiResult = await Api.get();
-      setCache("data", { updatedAt: new Date(), apiResult });
+      setCache("data", { result: apiResult, updatedAt: new Date().getFullYear() });
 
       return apiResult;
     }
 
     // prepare date check
-    const today = new Date().getDate();
-    const updatedAt = new Date(cache.updatedAt).getDate();
-
-    if (today === updatedAt) {
-      console.log("Compared dates on load", { updatedAt, today });
-      console.log("Valid cache for today", { cache });
-      return cache.apiResult;
-    }
+    const currentYear = new Date().getFullYear();
+    if (currentYear === cache.updatedAt) return cache.result;
 
     // new date, old cache. clear cache and reload page
     forceApplicationRefresh();
   }
 
-  private _setApiResult = (apiResult: Api.IGetPrayersApiResponse): void => {
+  /**
+   * This method is responsible for fetching and setting the daily prayer times for today's date.
+   * It first gets today's date in the YYYY-MM-DD format and then retrieves the cached prayer times for this date.
+   * It then maps over the English prayer names to create an array of prayer objects, where each object contains the index, Arabic name,
+   * English name, prayer time, and whether the prayer has passed or not.
+   * The prayer time is retrieved from the cached prayer times and converted from 24-hour format to milliseconds, and the "passed" property is set
+   * to true if the current time is after the prayer time.
+   * Finally, the prayers array is set in the store for the current day.
+  */
+  private _setPrayersForToday = (): void => {
+    const today = getToday();
+    const todayPrayerTimes = getPrayersByDateCache(today)
+
     const prayers = prayerNamesEnglish.map((name, index): IPrayerItem => {
       const prayer = {
         index,
         arabic: prayerNamesArabic[index],
         english: name,
         passed: false,
-        time: apiResult[name.toLocaleLowerCase()],
+        time: todayPrayerTimes[name.toLocaleLowerCase()],
         timeLeft: "..."
       };
 
-      const military = convert12To24hr(prayer.english, prayer.time);
-      const time = convert24hrToMillisecond(military);
+      const time = convert24hrToMillisecond(prayer.time);
       const now = new Date().getTime();
 
-      prayer.time = military;
       prayer.passed = now > time;
 
       return prayer;
     });
 
     this.Store.prayers = prayers;
+    this.Store.prayersDate = todayPrayerTimes.date;
   };
 
+  /**
+   * Sets the index of the next prayer in the prayers array.
+   * The index is determined by finding the first prayer in the array
+   * that has not yet passed. If all prayers have passed, the index is set to -1.
+  */
   private _setNextPrayerIndex = (): void => {
     this.Store.nextPrayerIndex = this.Store.prayers.findIndex((prayer) => !prayer.passed);
   };
