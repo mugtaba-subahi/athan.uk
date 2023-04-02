@@ -1,36 +1,11 @@
-import convertTime from "convert-time";
-import { forceApplicationRefresh } from "!utils/application";
-import { getCache } from "!utils/cache";
+import useStore from "!stores";
+import { PrayerController } from "!controllers/Prayer";
+import { storeToRefs } from "pinia";
 
-export const validateTime = (time: string): boolean => {
-  const militaryTimeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-
-  if (typeof time !== "string") return false;
-  else if (!time.match(militaryTimeRegex)) return false;
-  else return true;
-};
-
-export const convert12To24hr = (name: string, time: string): string => {
-  const isValidTime: boolean = validateTime(time);
-  if (!isValidTime) throw { error: true, message: "Invalid time" };
-
-  if (name === "Dhuhr") {
-    const [dhuhrHour] = time.split(":");
-
-    // check if dhuhr is in afternoon or morning. 5(pm)
-    if (+dhuhrHour < 5) return convertTime(`${time} PM`, "hh:MM");
-  }
-
-  const pmPrayers: string[] = ["Asr", "Magrib", "Isha"];
-  if (pmPrayers.indexOf(name) !== -1) return convertTime(`${time} PM`, "hh:MM");
-
-  return time;
-};
+// return YYYY-MM-DD
+export const getToday = () => new Date().toISOString().substring(0, 10);
 
 export const convert24hrToMillisecond = (time: string): number => {
-  const isValidTime = validateTime(time);
-  if (!isValidTime) throw { error: true, message: "Invalid time" };
-
   const [hour, minute] = time.split(":");
 
   const now = new Date();
@@ -42,24 +17,24 @@ export const convert24hrToMillisecond = (time: string): number => {
   return now.getTime();
 };
 
-// must use interval. using settimeout until midnight will be throttled
+/**
+ * This function runs a loop until midnight and checks for a new date every 5 minutes.
+ * If the current date is different from the stored date, it initializes a new prayer controller.
+ * This function does not return anything and only logs a message when starting the loop.
+ * It uses an interval instead of a timeout to avoid throttling.
+ */
 export const loopUntilMidnight = (): void => {
-  console.log('Starting midnight loop...');
+  console.log('Starting 5 mins midnight loop...');
 
   const checkNewDateEveryMs = 300_000; // every 5 mins
+  const Store = useStore();
 
-  setInterval((): void => {
-    const cache = getCache("data");
-    const isNewDay = new Date(cache.updatedAt).getUTCDate() !== new Date().getUTCDate();
+  const intervalId = setInterval(async () => {
+    if (getToday() === Store.prayersDate) return;
 
-    console.log('Checking if new day on loop', {
-      storedDay: new Date(cache.updatedAt).getUTCDate(),
-      newDay: new Date().getUTCDate(),
-      isNewDay
-    });
+    await new PrayerController(Store).init();
+    clearInterval(intervalId);
 
-    if (!isNewDay) return console.log('Is not a new day');
-
-    forceApplicationRefresh();
+    console.log('New day. Loop closed.');
   }, checkNewDateEveryMs);
 };

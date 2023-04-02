@@ -7,11 +7,19 @@
 </template>
 
 <script lang="ts" setup>
-const date = new Date().toLocaleString("en-GB", {
-  weekday: "short",
-  year: "numeric",
-  month: "short",
-  day: "numeric"
+import useStore from "!stores";
+
+const Store = useStore();
+
+const date = computed(() => {
+  const date = new Date(Store.prayersDate);
+
+  return date.toLocaleString("en-GB", {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
 });
 </script>
 

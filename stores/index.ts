@@ -10,12 +10,14 @@ export interface IPrayerItem {
 }
 
 export interface IUseStoreState {
+  prayersDate: string;
   prayers: IPrayerItem[];
   nextPrayerIndex: number;
 }
 
 export default defineStore("store", {
   state: (): IUseStoreState => ({
+    prayersDate: '',
     prayers: [],
     nextPrayerIndex: -1
   })
