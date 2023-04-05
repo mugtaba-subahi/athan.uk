@@ -8,6 +8,93 @@ export default defineNuxtConfig({
 
   modules: ["@vite-pwa/nuxt", "@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
 
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      "id": "/",
+      "name": "Athan",
+      "short_name": "Athan",
+      "description": "London prayer times",
+      "theme_color": "#031b4b",
+      "background_color": "#311473",
+      "display": "standalone",
+      "orientation": "portrait",
+      "scope": "/",
+      "start_url": "/",
+      "icons": [
+        {
+          "src": "icons/favicon-16x16.ico",
+          "sizes": "16x16",
+          "type": "image/x-icon"
+        },
+        {
+          "src": "icons/favicon-32x32.ico",
+          "sizes": "32x32",
+          "type": "image/x-icon"
+        },
+        {
+          "src": "icons/icon-48x48.png",
+          "sizes": "48x48",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-72x72.png",
+          "sizes": "72x72",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-128x128.png",
+          "sizes": "128x128",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-144x144.png",
+          "sizes": "144x144",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-152x152.png",
+          "sizes": "152x152",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-284x284.png",
+          "sizes": "284x284",
+          "type": "image/png"
+        },
+        {
+          "src": "icons/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
+    },
+    workbox: {
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    },
+    client: {
+      installPrompt: true,
+      // you don't need to include this: only for testing purposes
+      // if enabling periodic sync for update use 1 hour or so (periodicSyncForUpdates: 3600)
+      periodicSyncForUpdates: 20,
+    },
+    devOptions: {
+      enabled: true,
+      type: 'module',
+    },
+  },
+
   alias: {
     "!api": resolve(__dirname, "./api"),
     "!utils": resolve(__dirname, "./utils"),
