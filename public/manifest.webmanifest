@@ -12,12 +12,12 @@
   "splash_pages": null,
   "icons": [
     {
-      "src": "icons/icon-16x16.ico",
+      "src": "icons/favicon-16x16.ico",
       "sizes": "16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "icons/icon-32x32.ico",
+      "src": "icons/favicon-32x32.ico",
       "sizes": "32x32",
       "type": "image/x-icon"
     },
