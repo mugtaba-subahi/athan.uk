@@ -1,13 +1,13 @@
 import { resolve } from "path";
 import { defineNuxtConfig } from "nuxt";
-import { VitePWA } from "vite-plugin-pwa";
+// import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
   plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
 
-  modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
+  modules: ["@vite-pwa/nuxt", "@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
 
   alias: {
     "!api": resolve(__dirname, "./api"),
@@ -20,20 +20,20 @@ export default defineNuxtConfig({
     "!controllers": resolve(__dirname, "./controllers")
   },
 
-  vite: {
-    plugins: [
-      VitePWA({
-        base: "/",
-        manifestFilename: "manifest.json",
-        injectRegister: null,
-        scope: "/",
-        workbox: {
-          globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
-          disableDevLogs: true
-        }
-      })
-    ]
-  },
+  // vite: {
+  //   plugins: [
+  //     VitePWA({
+  //       base: "/",
+  //       manifestFilename: "manifest.json",
+  //       injectRegister: null,
+  //       scope: "/",
+  //       workbox: {
+  //         globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
+  //         disableDevLogs: true
+  //       }
+  //     })
+  //   ]
+  // },
 
   meta: {
     title: "Athan",
@@ -57,7 +57,7 @@ export default defineNuxtConfig({
       { rel: "apple-touch-icon", sizes: "152x152", href: "/icons/icon-mask-152x152.png" },
       { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-mask-192x192.png" }
     ],
-    script: [{ src: "/registerSW.js" }]
+    // script: [{ src: "/registerSW.js" }]
   },
 
   googleFonts: {

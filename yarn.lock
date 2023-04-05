@@ -1379,6 +1379,14 @@
     "@rollup/pluginutils" "^3.1.0"
     magic-string "^0.25.7"
 
+"@rollup/plugin-replace@^5.0.1":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-5.0.2.tgz#45f53501b16311feded2485e98419acb8448c61d"
+  integrity sha512-M9YXNekv/C/iHHK+cvORzfRYfPbq0RDD8r0G+bMiTXjNGKulPnCT9O3Ss46WfhI6ZOCgApOP7xAdmCQJ+U2LAA==
+  dependencies:
+    "@rollup/pluginutils" "^5.0.1"
+    magic-string "^0.27.0"
+
 "@rollup/plugin-wasm@^5.2.0":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-wasm/-/plugin-wasm-5.2.0.tgz#2bcd2de23c67b6067b1477566b680d677814a145"
@@ -1401,7 +1409,7 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@rollup/pluginutils@^5.0.2":
+"@rollup/pluginutils@^5.0.1", "@rollup/pluginutils@^5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.0.2.tgz#012b8f53c71e4f6f9cb317e311df1404f56e7a33"
   integrity sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==
@@ -1497,6 +1505,14 @@
     node-gyp-build "^4.2.2"
     resolve-from "^5.0.0"
     rollup-pluginutils "^2.8.2"
+
+"@vite-pwa/nuxt@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@vite-pwa/nuxt/-/nuxt-0.0.7.tgz#b8c671e2b3f743b19c334ed5d4e05e6b67de9d91"
+  integrity sha512-7bUTHbameF4GMLQjuyICB761YTC2/Zp6s+rd3hz63Q8lUHP/WUkvOhkoqAoA7CrRPrM85QDeOJKBEvailDb5+w==
+  dependencies:
+    "@nuxt/kit" "^3.2.0"
+    vite-plugin-pwa "^0.14.4"
 
 "@vitejs/plugin-vue-jsx@^2.0.0":
   version "2.1.1"
@@ -5673,10 +5689,17 @@ rollup-pluginutils@^2.8.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rollup@^2.43.1, rollup@^2.75.7, rollup@^2.77.3, rollup@^2.79.1:
+rollup@^2.43.1, rollup@^2.77.3, rollup@^2.79.1:
   version "2.79.1"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.79.1.tgz#bedee8faef7c9f93a2647ac0108748f497f081c7"
   integrity sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==
+  optionalDependencies:
+    fsevents "~2.3.2"
+
+rollup@^3.7.2:
+  version "3.20.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.20.2.tgz#f798c600317f216de2e4ad9f4d9ab30a89b690ff"
+  integrity sha512-3zwkBQl7Ai7MFYQE0y1MeQ15+9jsi7XxfrqwTb/9EK8D9C9+//EBR4M+CuA1KODRaNbFez/lWxA5vhEGZp4MUg==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -6580,17 +6603,18 @@ vite-plugin-checker@^0.4.9:
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^3.0.2"
 
-vite-plugin-pwa@^0.12.3:
-  version "0.12.8"
-  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.12.8.tgz#9eee41771fd9b84bdd5fb548cf6e19ed09bfc2ae"
-  integrity sha512-pSiFHmnJGMQJJL8aJzQ8SaraZBSBPMGvGUkCNzheIq9UQCEk/eP3UmANNmS9eupuhIpTK8AdxTOHcaMcAqAbCA==
+vite-plugin-pwa@^0.14.4:
+  version "0.14.7"
+  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.14.7.tgz#56844ff767d54256f45f49f91bfdff9dd1ea7685"
+  integrity sha512-dNJaf0fYOWncmjxv9HiSa2xrSjipjff7IkYE5oIUJ2x5HKu3cXgA8LRgzOwTc5MhwyFYRSU0xyN0Phbx3NsQYw==
   dependencies:
+    "@rollup/plugin-replace" "^5.0.1"
     debug "^4.3.4"
-    fast-glob "^3.2.11"
+    fast-glob "^3.2.12"
     pretty-bytes "^6.0.0"
-    rollup "^2.75.7"
-    workbox-build "^6.5.3"
-    workbox-window "^6.5.3"
+    rollup "^3.7.2"
+    workbox-build "^6.5.4"
+    workbox-window "^6.5.4"
 
 "vite@^2.9.12 || ^3.0.0-0":
   version "3.2.5"
@@ -6803,7 +6827,7 @@ workbox-broadcast-update@6.5.4:
   dependencies:
     workbox-core "6.5.4"
 
-workbox-build@^6.5.3:
+workbox-build@^6.5.4:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/workbox-build/-/workbox-build-6.5.4.tgz#7d06d31eb28a878817e1c991c05c5b93409f0389"
   integrity sha512-kgRevLXEYvUW9WS4XoziYqZ8Q9j/2ziJYEtTrjdz5/L/cTUa2XfyMP2i7c3p34lgqJ03+mTiz13SdFef2POwbA==
@@ -6938,7 +6962,7 @@ workbox-sw@6.5.4:
   resolved "https://registry.yarnpkg.com/workbox-sw/-/workbox-sw-6.5.4.tgz#d93e9c67924dd153a61367a4656ff4d2ae2ed736"
   integrity sha512-vo2RQo7DILVRoH5LjGqw3nphavEjK4Qk+FenXeUsknKn14eCNedHOXWbmnvP4ipKhlE35pvJ4yl4YYf6YsJArA==
 
-workbox-window@6.5.4, workbox-window@^6.5.3:
+workbox-window@6.5.4, workbox-window@^6.5.4:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/workbox-window/-/workbox-window-6.5.4.tgz#d991bc0a94dff3c2dbb6b84558cff155ca878e91"
   integrity sha512-HnLZJDwYBE+hpG25AQBO8RUWBJRaCsI9ksQJEp3aCOFCaG5kqaToAYXFRAHxzRluM2cQbGzdQF5rjKPWPA1fug==
