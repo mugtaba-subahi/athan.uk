@@ -1,6 +1,5 @@
 import { resolve } from "path";
 import { defineNuxtConfig } from "nuxt";
-// import { VitePWA } from "vite-plugin-pwa";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -19,21 +18,6 @@ export default defineNuxtConfig({
     "!components": resolve(__dirname, "./components"),
     "!controllers": resolve(__dirname, "./controllers")
   },
-
-  // vite: {
-  //   plugins: [
-  //     VitePWA({
-  //       base: "/",
-  //       manifestFilename: "manifest.json",
-  //       injectRegister: null,
-  //       scope: "/",
-  //       workbox: {
-  //         globPatterns: ["**/icon-144x144.png", "**/*.{html,js,mjs,css,svg,woff2,ico}"],
-  //         disableDevLogs: true
-  //       }
-  //     })
-  //   ]
-  // },
 
   meta: {
     title: "Athan",
@@ -56,8 +40,7 @@ export default defineNuxtConfig({
       { rel: "apple-touch-icon", sizes: "120x120", href: "/icons/icon-mask-120x120.png" },
       { rel: "apple-touch-icon", sizes: "152x152", href: "/icons/icon-mask-152x152.png" },
       { rel: "apple-touch-icon", sizes: "192x192", href: "/icons/icon-mask-192x192.png" }
-    ],
-    // script: [{ src: "/registerSW.js" }]
+    ]
   },
 
   googleFonts: {

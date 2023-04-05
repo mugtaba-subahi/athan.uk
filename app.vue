@@ -58,14 +58,12 @@ body {
 }
 
 .tippy-box {
-  background-color: black;
   box-shadow: rgba(3, 27, 75, 0.5) 0px 2px 8px 0px;
   @apply text-white bg-black py-3 px-5 text-base;
 }
 
 .tippy-arrow {
-  background-color: black;
-  color: black;
+  @apply bg-black text-black;
 }
 </style>
 
