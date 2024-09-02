@@ -2,8 +2,18 @@ import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
 import { storeToRefs } from "pinia";
 
-// return YYYY-MM-DD
-export const getToday = () => new Date().toISOString().substring(0, 10);
+export const getToday = (): string => {
+  const now = new Date();
+  const londonDate = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/London',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(now);
+
+  const [day, month, year] = londonDate.split('/');
+  return `${year}-${month}-${day}`;
+};
 
 export const convert24hrToMillisecond = (time: string): number => {
   const [hour, minute] = time.split(":");
