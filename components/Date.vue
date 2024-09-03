@@ -8,18 +8,20 @@
 
 <script lang="ts" setup>
 import useStore from "!stores";
+import { computed } from 'vue';
 
 const Store = useStore();
 
 const date = computed(() => {
   const date = new Date(Store.prayersDate);
 
-  return date.toLocaleString("en-GB", {
+  return new Intl.DateTimeFormat("en-GB", {
     weekday: "short",
     year: "numeric",
     month: "short",
-    day: "numeric"
-  });
+    day: "numeric",
+    timeZone: "Europe/London"
+  }).format(date);
 });
 </script>
 
