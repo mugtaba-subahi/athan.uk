@@ -28,15 +28,15 @@ export const convert24hrToMillisecond = (time: string): number => {
 };
 
 /**
- * This function runs a loop until midnight and checks for a new date every 5 minutes.
+ * This function runs a loop until midnight and checks for a new date every 1 minute.
  * If the current date is different from the stored date, it initializes a new prayer controller.
  * This function does not return anything and only logs a message when starting the loop.
  * It uses an interval instead of a timeout to avoid throttling.
  */
 export const loopUntilMidnight = (): void => {
-  console.log('Starting 5 mins midnight loop...');
+  console.log('Starting 1 min midnight loop...');
 
-  const checkNewDateEveryMs = 300_000; // every 5 mins
+  const checkNewDateEveryMs = 60_000; // every 1 minute
   const Store = useStore();
 
   const intervalId = setInterval(async () => {
