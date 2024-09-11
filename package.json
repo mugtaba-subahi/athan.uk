@@ -23,7 +23,6 @@
     "@nuxtjs/google-fonts": "^3.0.0-0",
     "@nuxtjs/tailwindcss": "^5.3.2",
     "@vite-pwa/nuxt": "^0.0.7",
-    "clipboardy": "^3.0.0",
     "nuxt": "3.0.0-rc.8"
   }
 }
