@@ -48,25 +48,19 @@ const initializeNewDay = async (store: any, intervalId: NodeJS.Timeout): Promise
 const handleInterval = async (store: any, intervalId: NodeJS.Timeout): Promise<void> => {
   // Always check if it's the last minute before midnight
   if (isLastMinuteBeforeMidnight()) {
-    console.log('Is last minute before midnight');
-    
     clearInterval(intervalId);
     
     const checkNewDateEvery1sec = 1_000;
     
     intervalId = setInterval(async () => {
-      console.log('Now inside small interval');
       // If the current date is the same as the stored date, do nothing
       if (!isNewDay(store.prayersDate)) return;
-
-      console.log('New day');
 
       // Initialize a new prayer controller for the new day
       await initializeNewDay(store, intervalId);
     }, checkNewDateEvery1sec);
 
   } else {
-    console.log('Now inside big interval');
     // If the current date is the same as the stored date, do nothing
     if (!isNewDay(store.prayersDate)) return;
 
@@ -90,8 +84,6 @@ export const loopUntilMidnight = (): void => {
 
   // Determine the initial interval based on the current time
   const initialIntervalMs = isLastMinuteBeforeMidnight() ? 1_000 : checkNewDateEvery1min;
-
-  console.log('Inital interval is: ', initialIntervalMs);
 
   // Initial interval to check every 1 minute or 1 second based on the current time
   let intervalId = setInterval(() => handleInterval(Store, intervalId), initialIntervalMs);
