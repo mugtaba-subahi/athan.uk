@@ -16,6 +16,8 @@ import { storeToRefs } from "pinia";
 import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
 import { loopUntilMidnight } from "!utils/time";
+import { appIsOutdated } from "!utils/version";
+import { forceApplicationRefresh } from "!utils/application";
 
 const Store = useStore();
 const { prayers } = storeToRefs(Store);
@@ -38,6 +40,13 @@ const init = async () => {
 }
 
 onMounted(async () => {
+  const appNeedsUpdate = await appIsOutdated();
+
+  if (appNeedsUpdate) {
+    await forceApplicationRefresh()
+    return;
+  };
+
   await init()
 });
 </script>

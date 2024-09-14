@@ -39,8 +39,8 @@ export class PrayerController {
     const currentYear = new Date().getFullYear();
     if (currentYear === cache.updatedAt) return cache.result;
 
-    // new date, old cache. clear cache and reload page
-    forceApplicationRefresh();
+    // new year, old cache. clear cache and reload page
+    await forceApplicationRefresh();
   }
 
   /**
