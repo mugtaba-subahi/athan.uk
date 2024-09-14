@@ -1,6 +1,6 @@
 {
   "name": "athan",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",

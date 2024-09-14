@@ -2,12 +2,14 @@
   <div class="container">
     <Spinner v-if="isLoading" />
     <Error v-else-if="hasError" />
-    <div v-else>
+    <main v-else  class="main">
       <Timer />
-      <Date class="date" v-once />
-      <Prayer v-for="index in 6" :prayerIndex="index-1" />
-    </div>
-    <Footer v-if="!isLoading" />
+      <Date class="main__date" v-once />
+      <span>
+        <Prayer v-for="index in 6" :prayerIndex="index-1" />
+      </span>
+      <Footer />
+    </main>
   </div>
 </template>
 
@@ -40,7 +42,7 @@ const init = async () => {
 }
 
 onMounted(async () => {
-  // if (appIsOutdated()) await forceApplicationRefresh();
+  if (appIsOutdated()) await forceApplicationRefresh();
   await init();
 });
 </script>
@@ -51,13 +53,13 @@ onMounted(async () => {
 }
 
 html,
-body {
+body,
+#__nuxt {
   @apply h-full;
 }
 
 body {
-  @apply font-['Roboto'] grid text-white select-none p-4 bg-gradient-to-b from-midnight to-aurora;
-  @apply sm:justify-items-center;
+  @apply font-['Roboto'] text-white select-none p-4 bg-gradient-to-b from-midnight to-aurora;
 }
 
 .tippy-box {
@@ -72,10 +74,17 @@ body {
 
 <style lang="postcss" scoped>
 .container {
-  @apply sm:min-w-[630px] grid h-full;
+  @apply grid min-w-full h-full;
 }
 
-.date {
-  @apply mb-8;
+.main {
+  @apply grid;
+  @apply sm:min-w-[500px] sm:justify-self-center;
+
+  grid-template-rows: min-content min-content 1fr min-content;
+
+  &__date {
+    @apply mb-8;
+  }
 }
 </style>
