@@ -45,5 +45,5 @@ export const forceApplicationRefresh = async (): Promise<void> => {
   console.log('11.11.11.11.11');
 
 
-  // location.reload();
+  location.reload();
 };
