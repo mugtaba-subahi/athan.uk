@@ -15,7 +15,8 @@ export const forceApplicationRefresh = async (): Promise<void> => {
     
     for (const registration of registrations) {
       console.log('444');
-      await registration.unregister();
+      const x = await registration.unregister();
+      console.log(x);
       console.log('55555');
 
     }
@@ -23,6 +24,25 @@ export const forceApplicationRefresh = async (): Promise<void> => {
   }
 
   console.log('66666');
+
+  if ('serviceWorker' in navigator) {
+    console.log('77777');
+
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    console.log('88888');
+    console.log(registrations);
+    
+    for (const registration of registrations) {
+      console.log('99999');
+      const e = await registration.unregister();
+      console.log(e);
+      console.log('10101010');
+
+    }
+    
+  }
+
+  console.log('11.11.11.11.11');
 
 
   // location.reload();
