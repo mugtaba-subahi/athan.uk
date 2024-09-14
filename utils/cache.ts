@@ -1,4 +1,4 @@
-import { IGetPrayersApiResponse, ISinglePrayer } from "!api";
+import type { IGetPrayersApiResponse, ISinglePrayer } from "!api";
 
 interface ICacheData {
   result: IGetPrayersApiResponse;
