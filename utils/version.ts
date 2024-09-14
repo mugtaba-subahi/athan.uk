@@ -1,6 +1,6 @@
-export const appIsOutdated = async () => {
-  const response = await fetch("/package.json");
-  const { version } = await response.json();
+import { version } from '../package.json';
+
+export const appIsOutdated = () => {
   const cacheVersion = localStorage.getItem("app_version");
 
   console.log('App versions: ', { latest: version, cached: cacheVersion });
