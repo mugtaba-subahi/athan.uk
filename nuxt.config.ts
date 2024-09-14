@@ -1,11 +1,9 @@
 import { resolve } from "path";
-import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
   plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
-
   modules: ["@vite-pwa/nuxt", "@pinia/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
 
   pwa: {
@@ -27,7 +25,7 @@ export default defineNuxtConfig({
     "!controllers": resolve(__dirname, "./controllers")
   },
 
-  meta: {
+  $meta: {
     title: "Athan",
     htmlAttrs: [{ lang: "en" }],
     meta: [
@@ -57,13 +55,6 @@ export default defineNuxtConfig({
     }
   },
 
-  postcss: {
-    plugins: {
-      cssnano: true,
-      autoprefixer: true
-    }
-  },
-
   tailwindcss: {
     config: {
       content: ["~/components/*.vue"],
@@ -77,5 +68,7 @@ export default defineNuxtConfig({
         }
       }
     }
-  }
+  },
+
+  compatibilityDate: "2024-09-14",
 });

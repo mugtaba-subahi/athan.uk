@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
-import { useTippy, TippyOptions } from 'vue-tippy'
+import { useTippy } from 'vue-tippy'
 import { TimerController } from "!controllers/Timer";
 import useStore from "!stores";
 
@@ -25,21 +25,18 @@ const isNext = computed(() => prayerIndex === nextPrayerIndex.value);
 const timeLeft = computed(() => prayers.value[prayerIndex].timeLeft);
 
 const selected = ref(false);
-const prayerRef = ref(null);
+const prayerRef = ref();
 
-const tippyTransitionMS = 400;
-const options: TippyOptions = {
+let tippyInstance = useTippy(prayerRef, {
   content: timeLeft,
   arrow: true,
   trigger: "click",
-  duration: tippyTransitionMS,
+  duration: 400,
   inertia: true,
   animation: "shift-away-subtle",
   onHide() { selected.value = false },
   onShow() { selected.value = true }
-};
-
-let tippyInstance = useTippy(prayerRef, options);
+});
 
 if(!prayers.value[prayerIndex].passed) new TimerController(Store, prayerIndex).start();
 
