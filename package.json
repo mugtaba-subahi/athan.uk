@@ -22,7 +22,7 @@
   "devDependencies": {
     "@nuxtjs/google-fonts": "3.2.0",
     "@nuxtjs/tailwindcss": "6.12.1",
-    "@vite-pwa/nuxt": "0.10.5",
+    "@vite-pwa/nuxt": "0.0.7",
     "nuxt": "3.13.1"
   }
 }
