@@ -1,8 +1,8 @@
 import { deleteCache } from "!utils/cache";
 
 export const forceApplicationRefresh = async (): Promise<void> => {
-  deleteCache("data");
-  deleteCache("app_version");
+  // deleteCache("data");
+  // deleteCache("app_version");
 
 
   console.log('1111');
