@@ -13,14 +13,16 @@ export const forceApplicationRefresh = async (): Promise<void> => {
     console.log('33333');
     console.log(registrations);
     
-    for (const registration of await registrations) {
+    for (const registration of registrations) {
       console.log('444');
-      registration.unregister();
+      await registration.unregister();
+      console.log('55555');
+
     }
     
   }
 
-  console.log('55555');
+  console.log('66666');
 
 
   // location.reload();
