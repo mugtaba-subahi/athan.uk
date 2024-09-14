@@ -40,7 +40,7 @@ const init = async () => {
 }
 
 onMounted(async () => {
-  if (appIsOutdated()) await forceApplicationRefresh();
+  // if (appIsOutdated()) await forceApplicationRefresh();
   await init();
 });
 </script>
