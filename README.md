@@ -4,8 +4,6 @@ Lightweight PWA for checking daily Islamic prayer times in London.
 
 ## Demo
 
-![Scene 1](public/screenshots/scene-1.png)
-![Scene 2](public/screenshots/scene-2.png)
 ![Scene 3](public/screenshots/scene-3.png)
 
 ## Tech Stack
