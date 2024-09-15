@@ -70,7 +70,7 @@
   "screenshots": [
     {
       "src": "screenshots/scene-1.png",
-      "sizes": "1137x1711",
+      "sizes": "1133x1711",
       "form_factor": "narrow",
       "type": "image/png"
     },
