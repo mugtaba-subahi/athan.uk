@@ -8,10 +8,10 @@ export default defineNuxtConfig({
 
   pwa: {
     registerType: 'autoUpdate',
-    workbox: {
-      navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,mjs,html,png,svg,ico}'],
-    },
+    // workbox: {
+      // navigateFallback: '/',
+      // globPatterns: ['**/*.{js,css,mjs,html,png,svg,ico}'],
+    // },
   },
 
   alias: {
