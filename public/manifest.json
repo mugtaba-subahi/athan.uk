@@ -71,11 +71,19 @@
     {
       "src": "screenshots/scene-1.png",
       "sizes": "1137x1711",
+      "form_factor": "narrow",
       "type": "image/png"
     },
     {
       "src": "screenshots/scene-2.png",
       "sizes": "1133x1711",
+      "form_factor": "narrow",
+      "type": "image/png"
+    },
+    {
+      "src": "screenshots/scene-3.png",
+      "sizes": "1703x1703",
+      "form_factor": "wide",
       "type": "image/png"
     }
   ]
