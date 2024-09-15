@@ -1,8 +1,8 @@
 import * as Api from "!api";
 import { prayerNamesArabic, prayerNamesEnglish } from "!globals";
-import { IPrayerItem, IUseStoreState } from "!stores";
+import type { IPrayerItem, IUseStoreState } from "!stores";
 import { getCache, getPrayersByDateCache, setCache } from "!utils/cache";
-import { forceApplicationRefresh } from "!utils/application";
+import { forceAppRefresh } from "!utils/application";
 import { convert24hrToMillisecond, getToday } from "!utils/time";
 
 export class PrayerController {
@@ -40,7 +40,10 @@ export class PrayerController {
     if (currentYear === cache.updatedAt) return cache.result;
 
     // new year, old cache. clear cache and reload page
-    await forceApplicationRefresh();
+    forceAppRefresh();
+
+    // this will never be reached - forceAppRefresh will reload the page
+    throw new Error("Cache outdated");
   }
 
   /**
@@ -54,7 +57,7 @@ export class PrayerController {
   */
   private _setPrayersForToday = (): void => {
     const today = getToday();
-    const todayPrayerTimes = getPrayersByDateCache(today)
+    const todayPrayerTimes = getPrayersByDateCache(today);
 
     const prayers = prayerNamesEnglish.map((name, index): IPrayerItem => {
       const prayer = {

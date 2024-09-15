@@ -7,7 +7,7 @@
         We are investigating!
       </p>
       <img class="error--mosque" src="../assets/mosque.svg" alt="Icon of a mosque" />
-      <button class="close" @click="forceApplicationRefresh">
+      <button class="close" @click="forceAppRefresh">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="close--icon">
           <path
             stroke-linecap="round"
@@ -22,10 +22,10 @@
 </template>
 
 <script setup>
-import { forceApplicationRefresh } from "!utils/application";
+import { forceAppRefresh } from "!utils/application";
 
 // Refresh in 10 seconds if user doesnt click refresh
-setTimeout(() => forceApplicationRefresh(), 10_000);
+setTimeout(() => forceAppRefresh(), 10_000);
 </script>
 
 <style lang="postcss" scoped>

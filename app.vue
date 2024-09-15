@@ -18,8 +18,7 @@ import { storeToRefs } from "pinia";
 import useStore from "!stores";
 import { PrayerController } from "!controllers/Prayer";
 import { loopUntilMidnight } from "!utils/time";
-import { appIsOutdated } from "!utils/version";
-import { forceApplicationRefresh } from "!utils/application";
+import { logAppVersion, forceAppRefresh } from "!utils/application";
 
 const Store = useStore();
 const { prayers } = storeToRefs(Store);
@@ -28,21 +27,23 @@ const isLoading = ref(true);
 const hasError = ref(false);
 
 const init = async () => {
-  await new PrayerController(Store).init().catch((error) => {
+  try {
+    await new PrayerController(Store).init();
+
+    isLoading.value = false;
+
+    // start midnight loop if all prayers passed
+    prayers.value[prayers.value.length - 1].passed && loopUntilMidnight();
+  } catch (error) {
     console.error(error);
+    
     isLoading.value = false;
     hasError.value = true;
-    throw error;
-  });
-
-  isLoading.value = false;
-
-  // start midnight loop if all prayers passed
-  prayers.value[prayers.value.length - 1].passed && loopUntilMidnight();
+  }
 }
 
 onMounted(async () => {
-  if (appIsOutdated()) await forceApplicationRefresh();
+  logAppVersion();
   await init();
 });
 </script>
