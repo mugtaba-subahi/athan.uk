@@ -8,6 +8,12 @@ export default defineNuxtConfig({
 
   pwa: {
     registerType: 'autoUpdate',
+    devOptions: {
+      enabled: true,
+    },
+    client: {
+      installPrompt: true,
+    }
     // workbox: {
       // navigateFallback: '/',
       // globPatterns: ['**/*.{js,css,mjs,html,png,svg,ico}'],
