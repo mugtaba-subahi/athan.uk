@@ -1,43 +1,42 @@
-# Nuxt 3 Minimal Starter
+# Athan
 
+Lightweight PWA for checking daily Islamic prayer times in London.
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+## Demo
+
+![Scene 3](public/screenshots/scene-3.png)
+
+## Tech Stack
+
+- **Nuxt.js**: A framework for creating Vue.js applications.
+- **Pinia**: A state management library for Vue.js.
+- **Day.js**: A minimalist JavaScript library for date and time manipulation.
+- **Epic Spinners**: A collection of loading spinners with Vue.js integration.
+- **Tiny Timer**: A small timer library.
+- **Vue Tippy**: A tooltip directive for Vue.js.
+- **Tailwind CSS**: A utility-first CSS framework.
+- **Vite PWA**: A plugin for integrating Progressive Web App (PWA) features.
+- **Google Fonts**: Integration for using Google Fonts in the application.
+- **Vercel Analytics**: Analytics for Vercel deployments.
 
 ## Setup
 
 Make sure to install the dependencies:
 
-```bash
-# yarn
-yarn install
+1. Install dependencies using yarn:
 
-# npm
-npm install
+    ```bash
+    yarn install
+    ```
 
-# pnpm
-pnpm install --shamefully-hoist
-```
+2. Start the development server:
 
-## Development Server
+    ```bash
+    yarn run dev
+    ```
 
-Start the development server on http://localhost:3000
+3. Open your browser and navigate to:
 
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+    ```
+    http://localhost:3000
+    ```
