@@ -69,9 +69,7 @@ body {
 }
 
 .tippy-arrow {
-  /* @apply bg-black text-black; */
-  color: black !important;
-  background-color: black !important;
+  @apply bg-black text-black;
 }
 </style>
 
